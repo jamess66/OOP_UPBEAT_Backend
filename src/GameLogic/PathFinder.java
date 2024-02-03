@@ -4,44 +4,22 @@ import java.util.*;
 
 public class PathFinder {
 
-    private final static int[][][] neighborCoord = new int[][][]{
-            {{+1, 0}, {+1, -1}, {0, -1}, {-1, 0}, {0, +1}, {+1, +1}},
-            {{+1, 0}, {0, -1}, {-1, -1}, {-1, 0}, {-1, +1}, {0, +1}},
+    private final static int[][][] neighborCoordinate = new int[][][]{
+            {{+1, 0}, {+1, -1}, {0, -1}, {-1, 0}, {0, +1}, {+1, +1}}, // even row
+            {{+1, 0}, {0, -1}, {-1, -1}, {-1, 0}, {-1, +1}, {0, +1}}, // odd row
     };
 
-    public static class Point {
-        public Point parent;
-        public int x;
-        public int y;
+    private final static List<Region> EMPTY_LIST = new ArrayList<>();
 
-        public Point(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (this == obj) return true;
-            if (obj == null || getClass() != obj.getClass()) return false;
-            Point point = (Point) obj;
-            return x == point.x && y == point.y;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(x, y);
-        }
-    }
-
-    public static List<Point> findShortestPath(int[][] grid, Point start, Point goal) {
-        Set<Point> visited = new HashSet<>();
-        List<Point> path = new ArrayList<>();
-        Stack<Point> stack = new Stack<>();
+    public static List<Region> findShortestPath(Territory world, Region start, Region goal) {
+        Set<Region> visited = new HashSet<>();
+        List<Region> path = new ArrayList<>();
+        Stack<Region> stack = new Stack<>();
 
         stack.push(start);
 
         while (!stack.isEmpty()) {
-            Point current = stack.pop();
+            Region current = stack.pop();
 
             if (current.equals(goal)) {
                 while (current != null) {
@@ -54,16 +32,19 @@ public class PathFinder {
 
             visited.add(current);
 
-            Point next = null;
+            Region next = null;
             double minDistance = Integer.MAX_VALUE;
-            List<Point> neighbors = getNeighbors(grid, current);
+            List<Region> neighbors = getNeighbors(world, current);
 
-            for (Point neighbor : neighbors) {
+            for (Region neighbor : neighbors) {
                 if (!visited.contains(neighbor)) {
-                    double distance = findDistance(neighbor, goal);
+                    double distance = getDistance(neighbor, goal);
                     if (distance < minDistance) {
                         minDistance = distance;
                         next = neighbor;
+                    }else if(distance == minDistance){
+                        assert next != null;
+                        if(neighbor.x - goal.x < next.x - goal.x) next = neighbor;
                     }
                 }
             }
@@ -78,47 +59,28 @@ public class PathFinder {
             }
         }
 
-        return null; // No path found
+        return EMPTY_LIST; // No path found
     }
 
-    private static double findDistance(Point start, Point end){
+    private static double getDistance(Region start, Region end){
         return Math.sqrt(((end.x - start.x) * (end.x - start.x)) + ((end.y - start.y) * (end.y - start.y)));
     }
-    private static List<Point> getNeighbors(int[][] grid, Point current) {
-//        int[][][] neighborCoord = new int[][][]{
-//                {{+1, 0}, {0, -1}, {-1, -1}, {-1, 0}, {-1, +1}, {0, +1}},
-//                {{+1, 0}, {+1, -1}, {0, -1}, {-1, 0}, {0, +1}, {+1, +1}}
-//        };
-//
-//        int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
-//        List<Point> neighbors = new ArrayList<>();
-//
-//        for (int[] dir : directions) {
-//            int newX = current.x + dir[0];
-//            int newY = current.y + dir[1];
-//            if (isValidMove(grid, newX, newY)) {
-//                neighbors.add(new Point(newX, newY));
-//            }
-//        }
-//
-//        return neighbors;
-
-        List<Point> neighbour = new ArrayList<>();
+    protected static List<Region> getNeighbors(Territory world, Region current) {
+        Region[][] grid = world.getWorld();
+        List<Region> neighbour = new ArrayList<>();
         int parity = current.y % 2;
-        System.out.println(parity +" " +Arrays.deepToString(neighborCoord[parity]));
-        for (int[] coord : neighborCoord[parity]) {
-            int newX = current.x + coord[0];
-            int newY = current.y + coord[1];
-            if (isValidMove(grid, newX, newY)){
-                System.out.println(current.x + coord[0] + " " + (current.x + coord[1]));
-                neighbour.add(new Point(newX, newY));
+        for (int[] coordinate  : neighborCoordinate[parity]) {
+            int newX = current.x + coordinate[0];
+            int newY = current.y + coordinate[1];
+            if (isValidRegion(world, newX, newY)){
+                neighbour.add(grid[newX][newY]);
             }
-
         }
         return neighbour;
     }
 
-    private static boolean isValidMove(int[][] grid, int x, int y) {
-        return x >= 0 && x < grid.length && y >= 0 && y < grid[0].length && grid[x][y] == 0;
+    private static boolean isValidRegion(Territory world, int x, int y) {
+        Region[][] grid = world.getWorld();
+        return x >= 0 && x < grid.length && y >= 0 && y < grid[0].length && !grid[x][y].isBlocked();
     }
 }

@@ -1,30 +1,32 @@
 package GameLogic;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class Player {
-    private String name = "";
-    private int currentX = 0;
-    private int currentY = 0;
+    private Region currentAt;
 
-    private WorldMap worldMap;
-
-    public Player(String name, WorldMap worldMap) {
-        this.name = name;
-        this.worldMap = worldMap;
-    }
-
-    public void spawn() {
+    public Player(Territory territory) {
         Random rand = new Random();
-        currentX = rand.nextInt(worldMap.width);
-        currentY = rand.nextInt(worldMap.height);
+        int randx = rand.nextInt(territory.getTerritorySize()[0]);
+        int randy = rand.nextInt(territory.getTerritorySize()[1]);
+        currentAt = territory.getRegion(randx,randy);
     }
 
-    public int[] position(){
-        return new int[]{currentX,currentY};
+    public Player(Territory territory, int x, int y) {
+        currentAt = territory.getRegion(x,y);
     }
 
-    public Region atRegion(){
-        return worldMap.getRegion(currentX, currentY);
+    public void setCurrentRegion(Region region){
+        currentAt = region;
+    }
+
+    public Region getCurrentAt() {
+        return currentAt;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
 }

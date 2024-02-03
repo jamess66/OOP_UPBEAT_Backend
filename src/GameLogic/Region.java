@@ -1,26 +1,55 @@
 package GameLogic;
 
+import java.util.Objects;
+
 public class Region {
-    protected int x, y;
-
-    protected int g, h;
-
     Region parent;
+    final int x;
+    final int y;
+    private Player onwer;
+    private boolean isBlocked;
 
-    protected Region(int x, int y) {
+    public Region(int x, int y, boolean isBlocked) {
         this.x = x;
         this.y = y;
-        g = h = 0;
-        parent = null;
+        this.isBlocked = isBlocked;
+        onwer = null;
     }
 
-    protected int f() {
-        return g + h;
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Region region = (Region) obj;
+        return x == region.x && y == region.y;
     }
 
-    public int[] getIntPairRegionCoordinate() {
-        return new int[]{x,y};
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 
+    public int[] getCoordinate(){
+        return new int[]{x, y};
+    }
 
+    public void claim(Player player){
+        onwer = player;
+    }
+
+    public void unClaim(Player player){
+        if(onwer.equals(player)) onwer = null;
+        else System.out.println("Not owner.");
+    }
+
+    public Player owner(){
+        return onwer;
+    }
+
+    public void setBlocked(boolean isBlocked) {
+        this.isBlocked = isBlocked;
+    }
+    public boolean isBlocked(){
+        return isBlocked;
+    }
 }
