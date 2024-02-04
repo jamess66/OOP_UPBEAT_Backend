@@ -1,4 +1,4 @@
-package GameLogic;
+package HexWorld;
 
 public class WorldGrid implements Territory {
     private final Region[][] world;

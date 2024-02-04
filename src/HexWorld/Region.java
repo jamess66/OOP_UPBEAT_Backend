@@ -1,5 +1,6 @@
-package GameLogic;
+package HexWorld;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Region {
@@ -51,5 +52,10 @@ public class Region {
     }
     public boolean isBlocked(){
         return isBlocked;
+    }
+
+    public static int distance(Region r1, Region r2){
+        if(Arrays.equals(r1.getCoordinate(), new int[]{-1, -1}) || Arrays.equals(r2.getCoordinate(), new int[]{-1, -1})) return 0;
+        return Math.abs(r1.x - r2.x) + Math.abs(r1.y - r2.y);
     }
 }
