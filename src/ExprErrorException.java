@@ -3,3 +3,9 @@ public class ExprErrorException extends Exception{
         super(message);
     }
 }
+
+class EvalError extends Exception{
+    public EvalError(String message){
+        super(message);
+    }
+}

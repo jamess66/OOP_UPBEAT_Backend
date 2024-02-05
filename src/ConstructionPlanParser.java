@@ -1,6 +1,7 @@
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 public class ConstructionPlanParser {
     private final ExprTokenizer token; //token = เก็บ text ทั้งบรรทักเลย
@@ -69,11 +70,11 @@ public class ConstructionPlanParser {
         Direction();
     }
     public void RegionCommand() throws ExprErrorException {
-        if (token.peek("invest") || token.peek("collect")) {
+//        if (token.peek("invest") || token.peek("collect")) {
             Expression();
-        } else {
-            throw new RuntimeException("Invalid region command");
-        }
+//        } else {
+//            throw new RuntimeException("Invalid region command");
+//        }
     }
     public void AttackCommand() throws ExprErrorException {
         if(token.peek("shoot")){
@@ -89,11 +90,13 @@ public class ConstructionPlanParser {
         if (Arrays.asList(validDirections).contains(token)) {
             // need to fix
             System.out.println(this.token.peek());
+            this.token.consume();
         } else {
             throw new RuntimeException("Invalid direction: " + token);
         }
     }
     public void BlockStatement() throws ExprErrorException {
+        if(token.peek("{")) {return;}
         while (!token.peek().equals("}")) {
             Statement();
         }
@@ -102,6 +105,7 @@ public class ConstructionPlanParser {
         }
     }
     public void IfStatement() throws ExprErrorException {
+
         token.consume("(");
         Expression();
         token.consume(")");
@@ -109,6 +113,7 @@ public class ConstructionPlanParser {
         Statement();
         token.consume("else");
         Statement();
+
     }
     public void WhileStatement() throws ExprErrorException {
         token.consume("(");
@@ -206,6 +211,17 @@ public class ConstructionPlanParser {
         return reservedWords.contains(token);
     }
 
+    record VariableMaker(AST.Expr s, AST.Expr f) implements AST.Expr{
+        public Float eval(Map<String,Float> bindings) throws EvalError {
+            Float i = s.eval(bindings);
+            Float j = f.eval(bindings);
+            return i;
+        }
 
+        @Override
+        public void prettyPrint(StringBuilder s) {
+
+        }
+    }
 
 }

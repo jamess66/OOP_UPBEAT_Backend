@@ -41,12 +41,12 @@ public class ExprTokenizer {
         return Line.get(pos);
     }
     public void checkNextToken() throws ExprErrorException {
-        if (!hasNextToken()) throw new ExprErrorException("no more tokens");
+        if (!hasNextToken()) throw new ExprErrorException("Have no token");
     }
     public String consume() throws ExprErrorException {
         checkNextToken();
         String result = Line.get(pos);
-        if (pos+1 != Line.size()){
+        if(pos+1 < Line.size()){
             pos++;
         }
         return result;
@@ -59,7 +59,7 @@ public class ExprTokenizer {
         if (peek(s))
             consume();
         else
-            throw new ExprErrorException(" expected");
+            throw new ExprErrorException("expected next word");
     }
 
 
