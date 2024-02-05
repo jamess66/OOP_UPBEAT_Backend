@@ -128,7 +128,7 @@ public class ConstructionPlanParser {
             Expression();
         }
         if(token.peek("-")){
-            token.consume("+");
+            token.consume("-");
             Expression();
         }
     }
