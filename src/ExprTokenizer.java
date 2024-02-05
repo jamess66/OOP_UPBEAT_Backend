@@ -1,96 +1,66 @@
-import java.util.NoSuchElementException;
-import java.util.StringTokenizer;
-public class ExprTokenizer extends StringTokenizer {
-    private final String str;
-    private String next;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+public class ExprTokenizer {
+    //Chat GPT
+    List<String> Line;
     private int pos;
-
-    public ExprTokenizer(String str) throws Exception {
-        super(str);
-        this.str = str;
-        pos = 0;
-        computeNext();
+    public ExprTokenizer(String line){
+        pos = 0 ;
+        this.Line = tokenize(line);
     }
-
+    private static final Pattern pattern = Pattern.compile(
+            "#[^\\n]*"+
+                    "|\\b(?:if|then|else|while|end|collect|invest|move|shoot|random|budget|deposit|opponent|nearby)\\b" + // Keywords
+                    "|[-+*/]" + // Arithmetic operators
+                    "|[-+]?\\d*\\.\\d+|\\d+" + // Numbers
+                    "|[\\(\\)\\{\\}\\[\\];,]" + // Punctuation
+                    "|=" + // Assignment operator
+                    "|\\b(?:upleft|downleft|downright|upright|up|down|left|right|done)\\b" + // Directions
+                    "|\\b(?:[a-zA-Z][a-zA-Z0-9]*|deposit|budget|opponentLoc|cost|dir)\\b" + // Variables
+                    "|\\b(?:nearby)\\b" + // Nearby keyword
+                    "|\\/\\/.*\\n" + // C++-style comments
+                    "|\\/\\/.*$" // C++-style comments
+    );
+    public static List<String> tokenize(String inputString) {
+        List<String> tokens = new ArrayList<>();
+        Matcher matcher = pattern.matcher(inputString);
+        while (matcher.find()) {
+            if (Pattern.matches("#[^\\n]*", matcher.group().trim())){return tokens;}
+            else {
+                tokens.add(matcher.group().trim());
+            }
+        }
+        return tokens;
+    }
     public boolean hasNextToken() {
-        return next != null;
-    }
-
-    public void checkNextToken() {
-        if (!hasNextToken()) throw new NoSuchElementException("No more tokens");
-    }
-
-    public String peek() {
+        return Line.get(pos) != null; }
+    public String peek() throws ExprErrorException {
         checkNextToken();
-        return next;
+        return Line.get(pos);
     }
-
-    public boolean peek(String s) {
-        if (!hasNextToken()) return false;
-        return next.equals(s);
+    public void checkNextToken() throws ExprErrorException {
+        if (!hasNextToken()) throw new ExprErrorException("no more tokens");
     }
-
-    public String consume() throws Exception {
+    public String consume() throws ExprErrorException {
         checkNextToken();
-        String result = next;
-        computeNext();
+        String result = Line.get(pos);
+        if (pos+1 != Line.size()){
+            pos++;
+        }
         return result;
     }
-
-    public void consume(String s) throws Exception {
-        if (peek(s)) {
+    public boolean peek(String s) throws ExprErrorException {
+        if (!hasNextToken()) return false;
+        return peek().equals(s);
+    }
+    public void consume(String s) throws ExprErrorException {
+        if (peek(s))
             consume();
-        } else throw new SyntaxErrorException(s + " expected");
+        else
+            throw new ExprErrorException(" expected");
     }
 
-    private void computeNext() throws Exception {
-        next = null;
-        StringBuilder s = new StringBuilder();
-        while (pos < str.length()) {
-            char c = str.charAt(pos);
-            if (isWhiteSpace(c)) {
-                pos++;
-                continue;
-            }
-            if (isDigit(c)) {
-                s.append(c);
-                pos++;
-                while (pos < str.length() && isDigit(str.charAt(pos))) {
-                    s.append(str.charAt(pos));
-                    pos++;
-                }
-            }else  if (isCharacter(c)) {
-                s.append(c);
-                pos++;
-                while (pos < str.length() && isCharacter(str.charAt(pos))) {
-                    s.append(str.charAt(pos));
-                    pos++;
-                }
-            } else if (isOperator(c)) {
-                s.append(c);
-                pos++;
-            } else if (c == '(' || c == ')') {
-                s.append(c);
-                pos++;
-            } else throw new LexicalErrorException("Unknown character: " + c);
-            next = s.toString();
-            break;
-        }
-    }
 
-    public boolean isOperator(char c) {
-        return c == '+' || c == '-' || c == '*' || c == '/' || c == '%';
-    }
-
-    private boolean isWhiteSpace(char c) {
-        return Character.isWhitespace(c);
-    }
-
-    private boolean isDigit(char c) {
-        return Character.isDigit(c);
-    }
-
-    private boolean isCharacter(char c) {
-        return Character.isLetter(c);
-    }
 }

@@ -1,11 +1,5 @@
-class SyntaxErrorException extends Exception {
-    public SyntaxErrorException(String message) {
-        super(message);
-    }
-}
-
-class LexicalErrorException extends Exception{
-    public LexicalErrorException(String message){
+public class ExprErrorException extends Exception{
+    public ExprErrorException(String message){
         super(message);
     }
 }
