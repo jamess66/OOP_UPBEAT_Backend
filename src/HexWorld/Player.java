@@ -6,12 +6,13 @@ import java.util.Random;
 import java.util.Properties;
 
 import static Config.ConfigLoader.INIT_BUDGET;
+import static Config.ConfigLoader.INIT_CENTER_DEP;
 
 public class Player {
 
     private Region currentAt;
     private Region cityCenter;
-    private int budget;
+    private float budget;
 
     public Player(Territory territory) {
         this.budget = INIT_BUDGET;
@@ -27,12 +28,12 @@ public class Player {
         spawn(territory, x, y);
     }
 
-    public int wallet(){
+    public float wallet(){
         return budget;
     }
 
-    public void pay(int cost){
-        int remain = budget - cost;
+    public void pay(float cost){
+        float remain = budget - cost;
         budget = Math.max(remain, 0);
     }
 
@@ -41,6 +42,7 @@ public class Player {
         currentAt = region;
         cityCenter = region;
         region.claim(this);
+        region.invest(this,INIT_CENTER_DEP);
     }
 
     public void setCurrentRegion(Region region){
@@ -56,10 +58,15 @@ public class Player {
     public void moveCityCenter(Region newCityCenter) {
         cityCenter = newCityCenter;
     }
+
+    public void addBudget(float budget){
+        this.budget = this.budget + budget;
+    }
     @Override
     public boolean equals(Object obj) {
+        if (obj == null ) return false;
         if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (getClass() != obj.getClass()) return false;
         Player player = (Player) obj;
         return super.equals(obj);
     }

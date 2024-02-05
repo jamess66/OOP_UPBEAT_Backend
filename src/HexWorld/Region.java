@@ -9,17 +9,20 @@ public class Region {
     final int y;
     private Player onwer;
     private boolean isBlocked;
+    public float deposit;
 
     public Region(int x, int y, boolean isBlocked) {
         this.x = x;
         this.y = y;
         this.isBlocked = isBlocked;
         onwer = null;
+        deposit = Float.MIN_VALUE;
     }
 
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
+        if (x == -1 && y == -1) return false;
         if (obj == null || getClass() != obj.getClass()) return false;
         Region region = (Region) obj;
         return x == region.x && y == region.y;
@@ -36,11 +39,30 @@ public class Region {
 
     public void claim(Player player){
         onwer = player;
+        deposit = 0;
+    }
+
+    public void invest(Player player, float investment){
+        if(onwer == null){
+            this.deposit = investment;
+        }else if(onwer.equals(player)){
+            this.deposit = this.deposit + investment;
+        }
+    }
+
+    public float getDeposit(){
+        return deposit;
+    }
+
+    public void collect(float collect){
+        deposit = Math.max(deposit - collect, 0);
     }
 
     public void unClaim(Player player){
-        if(onwer.equals(player)) onwer = null;
-        else System.out.println("Not owner.");
+        if(onwer.equals(player)){
+            onwer = null;
+            deposit = Float.MIN_VALUE;
+        } else System.out.println("Not owner.");
     }
 
     public Player owner(){

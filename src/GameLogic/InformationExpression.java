@@ -8,6 +8,7 @@ import static GameLogic.Direction.DIRECTION;
 
 public class InformationExpression {
     private static final Region INVALID_REGION = new Region(-1,-1,true);
+
     public static int nearby(Territory territory, Player player, int dir) {
         Region opponent;
         opponent = findOpponentRegion(territory, player, dir, Integer.MAX_VALUE);
@@ -58,7 +59,7 @@ public class InformationExpression {
                 currentY = newY;
                 region = territory.getRegion(newX,newY);
                 owner = region.owner();
-                if(owner != null && !owner.equals(player)){
+                if(owner != null && !player.equals(owner)){
                     return region;
                 }
             }
