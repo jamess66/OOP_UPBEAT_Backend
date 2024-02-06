@@ -1,0 +1,30 @@
+.hex-grid-content {
+  position: relative;
+  height: 50px;
+  width: 50px;
+  font-size: 20px;
+  color: #b18484;
+  background-color: rgb(110, 96, 187);
+  clip-path: polygon(75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%, 25% 0);
+  align-items: center;
+  text-decoration: none;
+  text-align: center;
+  transition: transform 0.24s ease-out;
+  margin-bottom: 0px;
+}
+
+.hex-grid-content:hover {
+  transform: scale(1.1);
+}
+
+.hexagon-container {
+  flex-wrap: wrap;
+  perspective: 30em;
+}
+
+.hexagon-container span {
+  line-height: 50px;
+  display: inline-block;
+  position: relative;
+  margin-bottom: 25px;
+}
