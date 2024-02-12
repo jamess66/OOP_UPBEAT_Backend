@@ -24,4 +24,6 @@
 .idmain {
   background-size: cover;
   display: flex;
+  background: fixed;
+  background-color: #0e1529;
 }
