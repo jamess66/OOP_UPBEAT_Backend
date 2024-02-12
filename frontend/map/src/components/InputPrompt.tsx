@@ -1,5 +1,7 @@
+import { useState } from "react";
 import "./InputPrompt.css";
-function InputPrompt() {
+
+const InputPrompt = ({}) => {
   return (
     <form className="input">
       <input
@@ -9,6 +11,6 @@ function InputPrompt() {
       ></input>
     </form>
   );
-}
+};
 
 export default InputPrompt;

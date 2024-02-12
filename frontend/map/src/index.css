@@ -20,3 +20,8 @@
 .hex-grid-content:active {
   transform: scale(0.24);
 }
+
+.idmain {
+  background-size: cover;
+  display: flex;
+}

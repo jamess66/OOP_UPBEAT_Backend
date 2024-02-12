@@ -8,13 +8,17 @@ function App() {
   const arr2: number[][] = Array(row).fill(arr) || [];
 
   return (
-    <div>
+    <div
+      style={{
+        marginTop: "10px",
+      }}
+    >
       {arr2.map((data, key) => {
         return (
           <div
             style={{
               display: "flex",
-              marginLeft: "60em",
+              // marginLeft: "60em",
             }}
             key={key}
           >
