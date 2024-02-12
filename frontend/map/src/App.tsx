@@ -14,7 +14,7 @@ function App() {
           <div
             style={{
               display: "flex",
-              marginLeft: "500px",
+              marginLeft: "60em",
             }}
             key={key}
           >
@@ -23,10 +23,10 @@ function App() {
                 <div
                   key={k}
                   style={{
-                    transform: `translate(-${(25 * k) / 4}px,${
-                      k % 2 === 0 ? "25px" : "0px"
+                    transform: `translate(-${(35 * k) / 4}px,${
+                      k % 2 === 0 ? "21px" : "0px"
                     }`,
-                    marginTop: k % 2 === 0 ? "5px" : "0px",
+                    marginTop: k % 2 === 0 ? "3px" : "0px",
                   }}
                   className={"hex-grid-content"}
                 ></div>

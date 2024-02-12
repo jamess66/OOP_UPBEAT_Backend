@@ -1,30 +1,22 @@
 .hex-grid-content {
   position: relative;
-  height: 50px;
+  height: 45px;
   width: 50px;
   font-size: 20px;
-  color: #b18484;
-  background-color: rgb(110, 96, 187);
+  background-color: #6e60bb;
+  color: #ffccaa;
   clip-path: polygon(75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%, 25% 0);
   align-items: center;
   text-decoration: none;
   text-align: center;
-  transition: transform 0.24s ease-out;
+  transition: transform 0.24s;
   margin-bottom: 0px;
+  /* padding-right: 10px; */
 }
 
 .hex-grid-content:hover {
-  transform: scale(1.1);
+  background-color: #ffccaa;
 }
-
-.hexagon-container {
-  flex-wrap: wrap;
-  perspective: 30em;
-}
-
-.hexagon-container span {
-  line-height: 50px;
-  display: inline-block;
-  position: relative;
-  margin-bottom: 25px;
+.hex-grid-content:active {
+  transform: scale(0.24);
 }
