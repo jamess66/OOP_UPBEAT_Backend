@@ -1,14 +1,17 @@
-import { useState } from "react";
 import "./InputPrompt.css";
-
-const InputPrompt = ({}) => {
+import React from "react";
+interface Props {
+  showdi: String;
+  setshowdi: React.Dispatch<React.SetStateAction<String>>;
+}
+const InputPrompt = () => {
   return (
     <form className="input">
-      <input
-        type="input"
+      <textarea
+        // type="input"
         placeholder=" / Write command here"
         className="input_box"
-      ></input>
+      ></textarea>
     </form>
   );
 };

@@ -2,9 +2,15 @@ import "./Time.css";
 
 function Time() {
   return (
-    <span className="count-timer">
-      {"minute"}:{"second"}
-    </span>
+    <div
+      style={{
+        marginLeft: "10px",
+      }}
+    >
+      <span className="count-timer">
+        {"minute"}:{"second"}
+      </span>
+    </div>
   );
 }
 

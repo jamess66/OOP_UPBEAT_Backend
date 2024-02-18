@@ -23,7 +23,6 @@
 
 .idmain {
   background-size: cover;
-  /* display: flex; */
-  background: fixed;
   display: flex;
+  background: fixed;
 }

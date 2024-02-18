@@ -3,9 +3,12 @@
   /* margin: 0;
   padding: 0; */
   /* padding: 20em; */
-  position: flex;
-  margin: auto;
-  padding: auto;
+  /* position: flex; */
+  /* margin: auto; */
+  /* padding: auto; */
+  background-color: #0e1529;
+  background-size: cover;
+  scroll-behavior: smooth;
 }
 /* .App {
   background-color: #0e1529;
