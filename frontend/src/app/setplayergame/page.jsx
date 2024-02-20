@@ -24,7 +24,7 @@ function playergame() {
             </form>
           </div>
           <div>
-            <Link href="/">
+            <Link href="/gamestate">
               <button className="buttonjoin">JOIN GAME</button>
             </Link>
           </div>

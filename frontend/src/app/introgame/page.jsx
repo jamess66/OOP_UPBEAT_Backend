@@ -4,7 +4,7 @@ import Link from "next/link";
 function introgame() {
   return (
     <header className="background">
-      <Link href="/gamestate">
+      <Link href="/setplayergame">
         <button className="Button1">NEW GAME</button>
       </Link>
       <Link href="/gameconfig">

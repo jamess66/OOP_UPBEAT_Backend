@@ -14,19 +14,6 @@ const ConfigurationPanel = ({ disable }) => {
     "Interest Rate Percentage",
   ];
 
-  // Units for each slider (เผื่อจะใช้ในอนาคต)
-  const units = [
-    "",
-    "",
-    " minutes",
-    " dollars",
-    " dollars",
-    " minutes",
-    " dollars",
-    " dollars",
-    " percentage",
-  ];
-
   // State to manage slider values
   const defaultValues = [20, 15, 5, 10000, 100, 30, 100, 1000000, 5];
   // State to manage slider values
