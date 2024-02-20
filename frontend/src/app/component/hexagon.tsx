@@ -1,6 +1,7 @@
 import React from "react";
 import "../component/ui/hexagom.css";
 import "../component/ui/prompt.css";
+import "../component/ui/profile.css";
 
 function Hexagon() {
   const column = 15;
@@ -21,7 +22,7 @@ function Hexagon() {
           <div
             style={{
               display: "flex",
-              marginLeft: "10%",
+              marginLeft: "25%",
             }}
             key={key}
           >
@@ -42,7 +43,10 @@ function Hexagon() {
           </div>
         );
       })}
-      <div></div>
+      <div className="box">
+        <button className="Profile">Profile</button>
+        <div className="box_cover"></div>
+      </div>
       <form className="input">
         <input
           type="input"

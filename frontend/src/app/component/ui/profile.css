@@ -1,0 +1,14 @@
+.Profile {
+  margin-left: -2px;
+  margin-top: -2px;
+  width: 523px;
+  height: 80px;
+  flex-shrink: 0;
+  border-radius: 50px 50px 0px 0px;
+  border: 1px solid #000;
+  background: #1d2b53;
+  font-size: 38px;
+  align-items: center;
+  justify-content: center;
+  font-family: "Anakotmai";
+}

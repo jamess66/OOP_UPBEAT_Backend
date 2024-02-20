@@ -1,5 +1,5 @@
 .input {
-  margin-left: -90%;
+  margin-left: -91%;
   margin-top: -10%;
 }
 .input_box {
@@ -13,4 +13,24 @@
   border: 1px solid black;
   font-family: "Anakotmai";
   color: black;
+}
+.box {
+  margin-left: -95%;
+  margin-top: -100%;
+  width: 523px;
+  height: 980px;
+  border-radius: 50px;
+  border: 2px solid #000;
+  background: #83769c;
+}
+.box_cover {
+  margin-top: 30px;
+  margin-left: 30px;
+  width: 450px;
+  height: 750px;
+  border-radius: 50px;
+  border: 1px solid #000;
+  background: #fff;
+  justify-content: center;
+  align-items: center;
 }
