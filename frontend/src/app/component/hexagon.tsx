@@ -1,4 +1,6 @@
+import React from "react";
 import "../component/ui/hexagom.css";
+import "../component/ui/prompt.css";
 
 function Hexagon() {
   const column = 15;
@@ -10,7 +12,7 @@ function Hexagon() {
   return (
     <div
       style={{
-        marginTop: "0px",
+        marginTop: "20px",
         marginLeft: "50%",
       }}
     >
@@ -19,7 +21,7 @@ function Hexagon() {
           <div
             style={{
               display: "flex",
-              marginLeft: "5%",
+              marginLeft: "10%",
             }}
             key={key}
           >
@@ -28,9 +30,9 @@ function Hexagon() {
                 <div
                   key={k}
                   style={{
-                    transform: `translate(-${(35 * k) / 4}px,${
+                    transform: `translate(-${(35 * k) / 4}px, ${
                       k % 2 === 0 ? "21px" : "0px"
-                    }`,
+                    })`,
                     marginTop: k % 2 === 0 ? "3px" : "0px",
                   }}
                   className={"hex-grid-content"}
@@ -40,6 +42,14 @@ function Hexagon() {
           </div>
         );
       })}
+      <div></div>
+      <form className="input">
+        <input
+          type="input"
+          placeholder=" / Write command here"
+          className="input_box"
+        ></input>
+      </form>
     </div>
   );
 }

@@ -1,0 +1,16 @@
+.input {
+  margin-left: -90%;
+  margin-top: -10%;
+}
+.input_box {
+  width: 450px;
+  border-radius: 50px;
+  padding: 10px 20px 10px;
+  transition: 0.2s;
+  font-size: 18px;
+  justify-items: auto;
+  align-items: center;
+  border: 1px solid black;
+  font-family: "Anakotmai";
+  color: black;
+}
