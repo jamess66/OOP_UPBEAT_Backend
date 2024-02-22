@@ -1,7 +1,7 @@
 package AST.Statement;
 
 import AST.Node.Exec;
-import Models.Commands;
+import GameLogics.Engine.PlayerInstance;
 
 import java.util.List;
 
@@ -13,8 +13,7 @@ public class BlockExc extends Exec {
     }
 
     @Override
-    public boolean execute(Commands command) {
-        System.out.println("Perform BlockExc " + nodes.toString());
+    public boolean execute(PlayerInstance command) {
         for(Exec node : nodes){
             if(!node.execute(command)) return false;
         }

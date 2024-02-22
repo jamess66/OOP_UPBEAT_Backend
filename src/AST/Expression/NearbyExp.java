@@ -1,7 +1,7 @@
 package AST.Expression;
 
-import Models.Utility.Direction;
-import Models.Commands;
+import GameLogics.Utility.Direction;
+import GameLogics.Engine.PlayerInstance;
 
 import static AST.Node.*;
 
@@ -13,8 +13,7 @@ public class NearbyExp extends Expr {
     }
 
     @Override
-    public long eval(Commands command) {
-        System.out.println("Perform nearby " + dir);
+    public long eval(PlayerInstance command) {
         return command.nearby(dir);
     }
 

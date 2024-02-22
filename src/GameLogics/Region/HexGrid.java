@@ -1,17 +1,13 @@
-package Models.Region;
-
-import Config.ConfigLoader;
-
-import java.util.Map;
+package GameLogics.Region;
 
 public class HexGrid implements Territory{
     private final Region[][] grid;
 
     private final int rows, cols;
 
-    public HexGrid(){
-        rows = (int) ConfigLoader.rows;
-        cols = (int) ConfigLoader.cols;
+    public HexGrid(int rows, int cols){
+        this.rows = rows;
+        this.cols = cols;
         grid = new Region[rows][cols];
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {

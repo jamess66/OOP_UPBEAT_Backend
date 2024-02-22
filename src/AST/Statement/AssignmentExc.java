@@ -1,6 +1,6 @@
 package AST.Statement;
 
-import Models.Commands;
+import GameLogics.Engine.PlayerInstance;
 
 import java.util.Map;
 
@@ -15,10 +15,10 @@ public class AssignmentExc extends Exec {
         this.expression = expression;
     }
 
-    public boolean execute(Commands command) {
-        System.out.println("Perform AssignmentExc");
+    public boolean execute(PlayerInstance command) {
         Map<String, Long> identifiers = command.getIdentifiers();
         identifiers.put(identifier, expression.eval(command));
-        return next.execute(command);
+        if(next != null) return next.execute(command);
+        return true;
     }
 }

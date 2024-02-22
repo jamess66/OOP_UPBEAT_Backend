@@ -1,6 +1,6 @@
 package AST.Expression;
 
-import Models.Commands;
+import GameLogics.Engine.PlayerInstance;
 
 import static AST.Node.*;
 import static AST.ASTErrorException.*;
@@ -16,8 +16,7 @@ public class BinaryOperateExp extends Expr {
         this.operator = operator;
     }
 
-    public long eval(Commands command) {
-        System.out.println("Perform BinaryOperateExp " + left + " " + operator + " " + right);
+    public long eval(PlayerInstance command) {
         long leftValue = left.eval(command);
         long rightValue = right.eval(command);
             return switch (operator) {

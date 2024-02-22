@@ -1,28 +1,27 @@
 package AST.Statement;
 
 import AST.Node.*;
-import Models.Commands;
+import GameLogics.Engine.PlayerInstance;
 
 public class IfExc extends Exec {
     protected final Expr condition;
-    protected Exec trueNode;
-    protected Exec falseNode;
+    protected Exec thenExec;
+    protected Exec elseExec;
 
-    public IfExc(Expr condition, Exec trueNode, Exec falseNode) {
+    public IfExc(Expr condition, Exec thenExec, Exec elseExec) {
         this.condition = condition;
-        this.trueNode = trueNode;
-        this.falseNode = falseNode;
+        this.thenExec = thenExec;
+        this.elseExec = elseExec;
     }
 
     @Override
-    public boolean execute(Commands command) {
-        System.out.println("Perform IfExc " + condition + " " + trueNode + " " + falseNode);
-        trueNode.next = next;
-        falseNode.next = next;
+    public boolean execute(PlayerInstance command) {
+        thenExec.next = next;
+        elseExec.next = next;
         if(condition.eval(command) > 0){
-            return trueNode.execute(command);
+            return thenExec.execute(command);
         } else {
-            return falseNode.execute(command);
+            return elseExec.execute(command);
         }
     }
 }

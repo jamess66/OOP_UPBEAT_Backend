@@ -1,7 +1,7 @@
 package AST.Expression;
 
 import AST.Node.Expr;
-import Models.Commands;
+import GameLogics.Engine.PlayerInstance;
 
 public class NumberExp extends Expr {
     private final long value;
@@ -11,13 +11,12 @@ public class NumberExp extends Expr {
     }
 
     @Override
-    public long eval(Commands command) {
-        System.out.println("Perform NumberExp " + value);
+    public long eval(PlayerInstance command) {
+        if(command == null) return eval();
         return value;
     }
 
     public long eval() {
-        System.out.println("Perform NumberExp " + value);
         return value;
     }
 

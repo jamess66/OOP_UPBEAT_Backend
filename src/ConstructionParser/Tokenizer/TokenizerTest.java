@@ -5,74 +5,75 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TokenizerTest {
-    private ExprTokenizer tkz;
+    private ConsTokenizer tkz;
 
     @Test
     public void testHasNext() {
-        tkz = new ExprTokenizer(null);
+        tkz = new ConsTokenizer(null);
         assertFalse(tkz.hasNext());
-        tkz = new ExprTokenizer("");
+        tkz = new ConsTokenizer("");
         assertFalse(tkz.hasNext());
-        tkz = new ExprTokenizer("Hi");
+        tkz = new ConsTokenizer("john");
         assertTrue(tkz.hasNext());
     }
 
     @Test
     public void testPeek() {
-        tkz = new ExprTokenizer(null);
+        tkz = new ConsTokenizer(null);
         assertThrows(TokenException.NoMoreToken.class, tkz::peek);
-        tkz = new ExprTokenizer("");
+        tkz = new ConsTokenizer("");
         assertThrows(TokenException.NoMoreToken.class, tkz::peek);
-        tkz = new ExprTokenizer("Hi");
-        assertEquals("Hi", tkz.peek());
+        tkz = new ConsTokenizer("james");
+        assertEquals("james", tkz.peek());
     }
 
     @Test
     public void testPeekString() {
-        tkz = new ExprTokenizer(null);
+        tkz = new ConsTokenizer(null);
         assertFalse(tkz.peek(""));
-        assertFalse(tkz.peek("Hi"));
-        tkz = new ExprTokenizer("");
+        assertFalse(tkz.peek("ahh"));
+        tkz = new ConsTokenizer("");
         assertFalse(tkz.peek(""));
-        assertFalse(tkz.peek("Hi"));
-        tkz = new ExprTokenizer("Hi");
-        assertTrue(tkz.peek("Hi"));
-        tkz = new ExprTokenizer("Hello World");
-        assertFalse(tkz.peek("Hi"));
+        assertFalse(tkz.peek("uhhh"));
+        tkz = new ConsTokenizer("hoho");
+        assertTrue(tkz.peek("hoho"));
+        tkz = new ConsTokenizer("Hello World");
+        assertFalse(tkz.peek("hi"));
         assertTrue(tkz.peek("Hello"));
     }
 
     @Test
     public void testConsume() {
-        tkz = new ExprTokenizer(null);
+        tkz = new ConsTokenizer(null);
         assertThrows(TokenException.NoMoreToken.class, tkz::consume);
-        tkz = new ExprTokenizer("");
+        tkz = new ConsTokenizer("");
         assertThrows(TokenException.NoMoreToken.class, tkz::consume);
-        tkz = new ExprTokenizer("Hi");
-        assertEquals("Hi", tkz.consume());
+        tkz = new ConsTokenizer("jeff");
+        assertEquals("jeff", tkz.consume());
     }
 
     @Test
     public void testConsumeString() {
-        tkz = new ExprTokenizer(null);
+        tkz = new ConsTokenizer(null);
         assertThrows(TokenException.NoMoreToken.class, () -> tkz.consume(""));
         assertThrows(TokenException.NoMoreToken.class, () -> tkz.consume("a"));
-        tkz = new ExprTokenizer("");
+        tkz = new ConsTokenizer("");
         assertThrows(TokenException.NoMoreToken.class, () -> tkz.consume(""));
         assertThrows(TokenException.NoMoreToken.class, () -> tkz.consume("a"));
-        tkz = new ExprTokenizer("a");
+        tkz = new ConsTokenizer("a");
         assertTrue(tkz.consume("a"));
-        tkz = new ExprTokenizer("a");
+        tkz = new ConsTokenizer("a");
         assertFalse(tkz.consume("abc"));
         assertTrue(tkz.consume("a"));
-        tkz = new ExprTokenizer("abc");
+        tkz = new ConsTokenizer("abc");
         assertFalse(tkz.consume("a"));
         assertTrue(tkz.consume("abc"));
     }
 
     @Test
     public void testComment() {
-        tkz = new ExprTokenizer("# Hello World \n Whatsup \n ###########");
-        assertTrue(tkz.consume("Whatsup"));
+        tkz = new ConsTokenizer("# test commend \n wasd \n ###########qwerty");
+        assertTrue(tkz.consume("wasd"));
     }
+
 }

@@ -1,21 +1,18 @@
-package Models.Engine;
+package GameLogics.Engine.Commands;
 
 import Config.ConfigLoader;
-import Models.Player.Player;
-import Models.Region.HexRegion;
-import Models.Region.Region;
-import Models.Region.Territory;
-import Models.Utility;
-import Models.Utility.*;
-
-import static Models.Utility.IntegerToDirection;
+import GameLogics.Player.Player;
+import GameLogics.Region.HexRegion;
+import GameLogics.Region.Region;
+import GameLogics.Region.Territory;
+import GameLogics.Utility;
+import GameLogics.Utility.*;
 
 public class InformationExpression {
 
     private static final Region INVALID_REGION = new HexRegion();
 
-    public static long nearby(Territory territory, Player player, int dir) {
-        Direction direction = IntegerToDirection(dir);
+    public static long nearby(Territory territory, Player player, Direction direction) {
         for (int i = 0; i <= getMaxOperateTime(player.getCurrentRegion()); i++) {
             Region opponent = findOpponentRegion(territory, player, direction, i);
             if(!opponent.equals(INVALID_REGION)){

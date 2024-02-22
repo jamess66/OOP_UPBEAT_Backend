@@ -1,4 +1,4 @@
-package Models;
+package GameLogics;
 
 public class GameService {
 

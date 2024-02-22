@@ -1,7 +1,7 @@
-package Models.Region;
+package GameLogics.Region;
 
 import Config.ConfigLoader;
-import Models.Player.Player;
+import GameLogics.Player.Player;
 
 public class HexRegion implements Region{
     private Player owner;

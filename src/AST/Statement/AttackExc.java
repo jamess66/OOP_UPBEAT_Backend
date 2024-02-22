@@ -1,7 +1,7 @@
 package AST.Statement;
 
-import Models.Commands;
-import Models.Utility.Direction;
+import GameLogics.Engine.PlayerInstance;
+import GameLogics.Utility.Direction;
 
 import static AST.Node.*;
 
@@ -15,8 +15,7 @@ public class AttackExc extends Exec {
     }
 
     @Override
-    public boolean execute(Commands command) {
-        System.out.println("Perform AttackExc " + direction + " " + expression);
+    public boolean execute(PlayerInstance command) {
         return command.attack(
                 direction,
                 expression.eval(command)

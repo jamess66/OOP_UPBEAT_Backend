@@ -1,6 +1,6 @@
-package Models.Region;
+package GameLogics.Region;
 
-import Models.Player.*;
+import GameLogics.Player.*;
 
 public interface Region {
     Player getOwner();

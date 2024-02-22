@@ -1,13 +1,12 @@
 package AST.Statement;
 
-import Models.Commands;
+import GameLogics.Engine.PlayerInstance;
 
 import static AST.Node.*;
 
 public class DoneExc extends Exec {
     @Override
-    public boolean execute(Commands game) {
-        System.out.println("Perform DoneExc");
+    public boolean execute(PlayerInstance game) {
         return true;
     }
 }

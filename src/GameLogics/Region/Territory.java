@@ -1,4 +1,4 @@
-package Models.Region;
+package GameLogics.Region;
 
 public interface Territory {
     Region getRegion(long row, long col);

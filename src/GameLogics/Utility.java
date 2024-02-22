@@ -1,10 +1,10 @@
-package Models;
+package GameLogics;
 
 import Config.ConfigLoader;
-import Models.Player.Player;
-import Models.Region.HexRegion;
-import Models.Region.Region;
-import Models.Region.Territory;
+import GameLogics.Player.Player;
+import GameLogics.Region.HexRegion;
+import GameLogics.Region.Region;
+import GameLogics.Region.Territory;
 
 import java.util.ArrayList;
 import java.util.List;

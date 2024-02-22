@@ -1,7 +1,7 @@
 package AST.Statement;
 
-import Models.Commands;
-import Models.Utility.Direction;
+import GameLogics.Engine.PlayerInstance;
+import GameLogics.Utility.Direction;
 
 import static AST.Node.*;
 
@@ -13,8 +13,7 @@ public class MoveExc extends Exec {
     }
 
     @Override
-public boolean execute(Commands command) {
-        System.out.println("Perform MoveExc " + direction);
+public boolean execute(PlayerInstance command) {
         return command.move(direction);
     }
 }

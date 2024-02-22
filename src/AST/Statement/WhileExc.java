@@ -1,35 +1,30 @@
 package AST.Statement;
 
-import Models.Commands;
+import AST.Expression.NumberExp;
+import GameLogics.Engine.PlayerInstance;
 
-public class WhileExc extends IfExc {
-    private int executionCount = 0;
+import java.util.ArrayList;
+import static AST.Node.*;
 
-    public WhileExc(Expr expression, Exec statements) {
-        super(expression, statements, null);
-        if (trueNode == null)
-            trueNode = this;
-    }
+public class WhileExc extends Exec {
+    private int executionRemain = 10000;
+    public Expr condition;
+    public Exec statement;
 
-    private Exec getLastExecs(Exec exec) {
-        while (exec != this && exec != null) {
-            if (exec.next == this || exec.next == null) return exec;
-            exec = exec.next;
-        }
-        return this;
+    public WhileExc(Expr condition, Exec statements) {
+        this.condition = condition;
+        this.statement = statements;
     }
 
     @Override
-    public boolean execute(Commands command) {
-        System.out.println("Perform WhileExc");
-        if (super.condition.eval(command) > 0) {
-            if (executionCount >= 10000)
-                return next.execute(command);
-            Exec last = getLastExecs(trueNode);
-            if (last != this) last.next = this;
-            executionCount++;
-            return trueNode.execute(command);
+    public boolean execute(PlayerInstance command) {
+        while (condition.eval(command) > 0 && executionRemain >= 0){
+            IfExc ifExc = new IfExc(new NumberExp(executionRemain), statement, new BlockExc(new ArrayList<>()));
+            if(ifExc.execute(command)){
+                executionRemain--;
+            }
         }
-        return next.execute(command);
+        if(next != null) return next.execute(command);
+        else return false;
     }
 }

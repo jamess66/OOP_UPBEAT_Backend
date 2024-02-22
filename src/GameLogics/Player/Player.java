@@ -1,11 +1,10 @@
-package Models.Player;
+package GameLogics.Player;
 
-import Models.Region.Region;
+import GameLogics.Region.Region;
 
 import java.util.Map;
 
 public interface Player {
-    String getName();
     long getBudget();
     void payCost(long cost);
     void addBudget(long money);

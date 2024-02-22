@@ -3,7 +3,7 @@ package ConstructionParser.Tokenizer;
 import java.util.Arrays;
 import java.util.List;
 
-public class ExprTokenizer implements Tokenizer {
+public class ConsTokenizer implements Tokenizer {
     private final String src;
     private String next;
     private String prev;
@@ -18,7 +18,7 @@ public class ExprTokenizer implements Tokenizer {
 
     private final List<String> command = Arrays.asList("done" , "relocate" , "move" , "invest" , "collect" , "shoot");
 
-    public ExprTokenizer(String src){
+    public ConsTokenizer(String src){
         this.src = src;
         pos = 0;
         compute();

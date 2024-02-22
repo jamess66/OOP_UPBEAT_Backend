@@ -1,20 +1,20 @@
-package Models.Engine;
-import Models.Player.Player;
-import Models.Region.Region;
-import Models.Region.Territory;
-import Models.Utility;
-import Models.Utility.Direction;
+package GameLogics.Engine;
+import GameLogics.Player.Player;
+import GameLogics.Region.Region;
+import GameLogics.Region.Territory;
+import GameLogics.Utility;
+import GameLogics.Utility.Direction;
 
 import java.util.List;
 
-import static Models.Utility.getRegionInDirection;
-import static Models.Utility.isPlayerOwner;
+import static GameLogics.Utility.getRegionInDirection;
+import static GameLogics.Utility.isPlayerOwner;
 
 
 public class GameCommands {
 
     static boolean done(){
-        return true;
+        return false;
     }
 
     public static boolean relocate(Player player){
@@ -25,11 +25,10 @@ public class GameCommands {
             if(currentRegion.getOwner() != null && isPlayerOwner(player,currentRegion)){ // cannot relocate if the region is opponent region but still pay cost.
                 player.updateCityCenter(currentRegion);
                 player.payCost(cost);
-                return true;
             }
             player.payCost(cost);
         }
-        return false;
+        return done(); // Once executed (regardless of the outcome), the evaluation of the construction plan in that turn ends.
     }
 
     public static boolean move(Territory territory, Player player, Direction direction){
@@ -40,46 +39,43 @@ public class GameCommands {
                 Region newRegion = territory.getRegion(newXY[0], newXY[1]);
                 if(newRegion.getOwner() == null ) player.updateCurrentRegion(newRegion);
                 else if(isPlayerOwner(player,newRegion)) player.updateCurrentRegion(newRegion);
-                else System.out.println("enemy");
             }
             player.payCost(1);
             return true;
         }
-        return false;// once execute turn end
+        return done();// If the player does not have enough budget to execute this command, the evaluation of the construction plan in that turn ends.
     }
 
     public static boolean invest(Territory territory , Player player, long investment){
         Region region = player.getCurrentRegion();
-        long cost = investment + 1;
-        if(player.getBudget() >= cost){
+        if(player.getBudget() >= 1 && player.getBudget() >= investment){
             if(isPlayerOwner(player,region)) {
-                player.payCost( cost);
+                player.payCost(investment);
                 region.updateDeposit(investment);
-                return true;
             }else{
                 List<Region> neighbours = Utility.getNeighbourRegions(territory,region);
                 for (Region neighbour : neighbours){// loop check exist player own neighbour
                     if(isPlayerOwner(player, neighbour)){
                         region.updateOwner(player);
-                        player.payCost( cost);
+                        player.payCost(investment);
                         region.updateDeposit(investment);
-                        return true;
                     }
                 }
             }
+            player.payCost(1);
         }
-        player.payCost(1);
-        return false;
+        return true; // just no-op not turn end
     }
 
 
     public static boolean collect(Player player, long collect){
         Region currentRegion = player.getCurrentRegion();
-        if(isPlayerOwner(player,currentRegion)){
-            if(player.getBudget() >= 1){
+
+        if(player.getBudget() >= 1){
+            if(isPlayerOwner(player,currentRegion)){
                 if(currentRegion.getDeposit() >= collect){
                     currentRegion.updateDeposit(-1 * collect);
-                    player.addBudget((long) collect);
+                    player.addBudget(collect);
                 }
                 if(currentRegion.getDeposit() <= 0){
                     currentRegion.updateOwner(null);
@@ -87,15 +83,14 @@ public class GameCommands {
                 if(player.getCityCenter().getDeposit() < 1){
                     player.updateCityCenter(null);
                 }
-                player.payCost(1);
-                return true;
-            }
+            } // not owner assume no-op
+            player.payCost(1);
+            return true;
         }
-        return false;
+        return done(); // If the player does not have enough budget to execute this command, the evaluation of the construction plan in that turn ends
     }
 
     public static boolean shoot(Territory territory, Player player, Direction direction, long expenditure){
-
         Region attackingRegion = getRegionInDirection(territory, player.getCurrentRegion(), direction);
         long cost = expenditure + 1;
         if(player.getBudget() >= cost){
@@ -109,9 +104,8 @@ public class GameCommands {
                 }
             }
             player.payCost(cost);
-            return true;
         }
-        return false;
+        return true;
     }
 
     private static int[] calculateNewXY(Direction direction, Region current) {

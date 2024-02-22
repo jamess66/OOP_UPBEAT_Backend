@@ -1,31 +1,26 @@
-package Models.Player;
+package GameLogics.Player;
 
 import Config.ConfigLoader;
-import Models.Region.Region;
-import Models.Region.Territory;
-import Models.Utility;
+import GameLogics.Region.Region;
+import GameLogics.Region.Territory;
+import GameLogics.Utility;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Crew implements Player{
-    private final String name;
+public class Crew implements Player {
     private long budget;
     private Region CityCenter;
     private Region currRegion;
     private final Map<String, Long> identifier;
-    private final Territory territory;
-    public Crew(Territory territory, String name) {
-        this.name = name;
-        this.territory = territory;
+
+    public Crew(Territory territory) {
         this.budget = ConfigLoader.getInit_budget();
         randomSpawn(territory);
         this.identifier = new HashMap<>();
     }
 
-    public Crew(Territory territory, int x, int y, String name){
-        this.name = name;
-        this.territory = territory;
+    public Crew(Territory territory, int x, int y){ // fixed spawn point **for testing only**
         this.budget = ConfigLoader.getInit_budget();
         Region region = territory.getRegion(x,y);
         this.currRegion = region;
@@ -41,18 +36,6 @@ public class Crew implements Player{
         this.CityCenter = region;
         this.currRegion = region;
         this.CityCenter.updateDeposit(true ,ConfigLoader.init_center_dep);
-    }
-
-
-
-
-    public static void main(String[] args) {
-        System.out.println(Utility.getRandomNumber(ConfigLoader.getRows()));
-    }
-
-    @Override
-    public String getName() {
-        return this.name;
     }
 
     @Override

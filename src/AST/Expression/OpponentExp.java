@@ -1,13 +1,12 @@
 package AST.Expression;
 
-import Models.Commands;
+import GameLogics.Engine.PlayerInstance;
 
 import static AST.Node.*;
 
 public class OpponentExp extends Expr {
     @Override
-    public long eval(Commands command) {
-        System.out.println("Perform OpponentExp");
+    public long eval(PlayerInstance command) {
         return command.opponent();
     }
 

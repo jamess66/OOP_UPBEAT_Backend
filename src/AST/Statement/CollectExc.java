@@ -1,6 +1,6 @@
 package AST.Statement;
 
-import Models.Commands;
+import GameLogics.Engine.PlayerInstance;
 import AST.Node.*;
 
 public class CollectExc extends Exec {
@@ -11,8 +11,7 @@ public class CollectExc extends Exec {
     }
 
     @Override
-    public boolean execute(Commands command) {
-        System.out.println("Perform CollectExc " + expr);
+    public boolean execute(PlayerInstance command) {
         return command.collect(expr.eval(command));
     }
 }

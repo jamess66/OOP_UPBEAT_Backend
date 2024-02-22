@@ -7,15 +7,15 @@ import AST.Expression.*;
 import AST.Statement.*;
 import AST.Node.*;
 import AST.ASTErrorException.*;
-import Models.Utility.Direction;
+import GameLogics.Utility.Direction;
 import ConstructionParser.ParserException.*;
-import ConstructionParser.Tokenizer.ExprTokenizer;
+import ConstructionParser.Tokenizer.ConsTokenizer;
 
 public class ConsParser implements Parser {
 
-    private final ExprTokenizer tkz;
+    private final ConsTokenizer tkz;
 
-    public ConsParser(ExprTokenizer tkz){
+    public ConsParser(ConsTokenizer tkz){
         if(!tkz.hasNext()){
             throw new NoMoreStatementException();
         }
@@ -62,7 +62,6 @@ public class ConsParser implements Parser {
         tkz.consume("{");
         List<Exec> blocks = new ArrayList<>(parseMultipleStatement());
         tkz.consume("}");
-        System.out.println("return new BlockExc(blocks);");
         return new BlockExc(blocks);
     }
 
@@ -72,7 +71,6 @@ public class ConsParser implements Parser {
         Expr expr = parseExpression();
         tkz.consume("}");
         Exec parse = parseStatement();
-        System.out.println("return new WhileExc(expr, parse);");
         return new WhileExc(expr, parse);
     }
 
@@ -91,8 +89,6 @@ public class ConsParser implements Parser {
         }else {
             falseState = new BlockExc(new ArrayList<>());
         }
-
-        System.out.println("return new IfExc(expr, trueState, falseState);");
         return new IfExc(expr, trueState, falseState);
     }
 
@@ -111,7 +107,6 @@ public class ConsParser implements Parser {
         else
             throw new NoSuchCommandException(identifier);
         Expr expr= parseExpression();
-        System.out.println("return new AssignmentExc(identifier, expr);");
         return new AssignmentExc(identifier, expr);
     }
 
@@ -130,14 +125,12 @@ public class ConsParser implements Parser {
 
     private Exec parseMoveCommand() {
         Direction direction = parseDirection();
-        System.out.println("return new MoveExc(direction);");
         return new MoveExc(direction);
     }
 
     private Exec parseAttackCommand() {
         Direction dir = parseDirection();
         Expr expr = parseExpression();
-        System.out.println("return new AttackExc(expr,dir);");
         return new AttackExc(expr,dir);
     }
 
@@ -156,13 +149,11 @@ public class ConsParser implements Parser {
 
     private Exec parseCollectCommand() {
         Expr expr = parseExpression();
-        System.out.println("return new CollectExc(expr);");
         return new CollectExc(expr);
     }
 
     private Exec parseInvestCommand() {
         Expr expr = parseExpression();
-        System.out.println("return new InvestExc(expr);");
         return new InvestExc(expr);
     }
 
@@ -197,7 +188,6 @@ public class ConsParser implements Parser {
 
     private Expr parsePower() {
         if (Character.isDigit(tkz.peek().charAt(0))) {
-            System.out.println("return new NumberExp(Long.parseLong(tkz.consume()));");
             return new NumberExp(Long.parseLong(tkz.consume()));
         } else if (tkz.peek("opponent") || tkz.peek("nearby")) {
             return parseInfoExpression();
@@ -207,7 +197,6 @@ public class ConsParser implements Parser {
             tkz.consume(")");
             return expr;
         }else if(Character.isAlphabetic(tkz.peek().charAt(0)) ){
-            System.out.println("return new IdentifierExp(tkz.consume());");
             return new IdentifierExp(tkz.consume());
         }
         return null;
@@ -215,12 +204,10 @@ public class ConsParser implements Parser {
     private Expr parseInfoExpression() {
         if (tkz.peek("opponent")) {
             tkz.consume();
-            System.out.println("return new OpponentExp();");
             return new OpponentExp();
         } else if (tkz.peek("nearby")) {
             tkz.consume();
             Direction direction = parseDirection();
-            System.out.println("return new NearbyExp(direction);");
             return new NearbyExp(direction);
         } else {
             throw new InvalidInfoExpressionException(tkz.peek());

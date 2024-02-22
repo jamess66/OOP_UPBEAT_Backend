@@ -7,5 +7,4 @@ public interface Tokenizer {
     String peek();
     boolean peek(String str);
     boolean peekIdentifier();
-    //boolean peekNumber();
 }
