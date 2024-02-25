@@ -1,7 +1,8 @@
+"use client";
 import Link from "next/link";
 import React, { useState } from "react";
 import "../styles/setplayergame.css";
-import axios from "axios";
+// import axios from "axios";
 function playergame() {
   // const [username, setUsername] = useState("");
   // submit = async () => {
@@ -31,7 +32,7 @@ function playergame() {
           </form>
           <div>
             <Link href="/gamestate">
-              <button className="buttonjoin" onClick={Submit} value="Submit">
+              <button className="buttonjoin" value="Submit">
                 JOIN GAME
               </button>
             </Link>
