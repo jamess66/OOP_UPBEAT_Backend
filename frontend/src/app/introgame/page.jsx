@@ -7,7 +7,7 @@ function introgame() {
       <Link href="/setplayergame">
         <button className="Button1">NEW GAME</button>
       </Link>
-      <Link href="/gameconfig">
+      <Link href="/config_game">
         <button className="Button2">GAME CONFIG</button>
       </Link>
     </header>

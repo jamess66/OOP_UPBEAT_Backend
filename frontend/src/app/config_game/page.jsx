@@ -1,5 +1,20 @@
+"use client";
 import React, { useState } from "react";
-import ConfigList from "./configList";
+import ConfigList from "../component/configList";
+import axios from "axios";
+async function fetchUsers() {
+  try {
+    const response = await axios.get(
+      "https://jsonplaceholder.typicode.com/users"
+    );
+    const users = response.data;
+    console.log("List of users:");
+    console.log(users);
+  } catch (error) {
+    console.error("Error fetching users:", error.message);
+  }
+}
+fetchUsers();
 
 const ConfigurationPanel = ({ disable }) => {
   const configItems = [
@@ -31,7 +46,7 @@ const ConfigurationPanel = ({ disable }) => {
   };
 
   return (
-    <div className="card p-4 w-5/6">
+    <div className="background">
       <div className="text-4xl font-bold mb-2 text-white uppercase text-center">
         game config
       </div>
