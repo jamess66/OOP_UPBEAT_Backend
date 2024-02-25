@@ -17,6 +17,9 @@ public class AssignmentExc extends Exec {
 
     public boolean execute(PlayerInstance command) {
         Map<String, Long> identifiers = command.getIdentifiers();
+        if(!identifiers.containsKey(identifier)){
+            identifiers.put(identifier, 0L);
+        }
         identifiers.put(identifier, expression.eval(command));
         if(next != null) return next.execute(command);
         return true;

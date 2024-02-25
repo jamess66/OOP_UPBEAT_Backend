@@ -21,12 +21,14 @@ import static com.UPBEATGame.Game.UPBEAT.ConstructionParser.Tokenizer.ReadConstr
 @Getter
 @Data
 public class CrewCommands implements PlayerInstance {
+    private final String playerName;
     private final Player player;
     private final Territory territory;
     private String constructionPlan;
     private List<Exec> parsedExec;
     private final Map<String, Long> boundVar;
-    public CrewCommands(Player player, Territory territory){
+    public CrewCommands(String playerName , Player player, Territory territory){
+        this.playerName = playerName;
         this.player = player;
         this.territory = territory;
         constructionPlan = "done";
@@ -81,6 +83,10 @@ public class CrewCommands implements PlayerInstance {
         return GameCommands.relocate(player);
     }
 
+    @Override
+    public String getPlayerName() {
+        return playerName;
+    }
     @Override
     public long nearby(Utility.Direction dir) {
         return InformationExpression.nearby(territory, player, dir);

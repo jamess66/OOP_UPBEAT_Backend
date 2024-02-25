@@ -24,18 +24,21 @@ import java.util.Map;
 public class PlayerObject {
     private String playerName;
     private Map<String, Long> identifier;
+    private long playerHashCode;
     private Player crewInfo;
 
 
-    public PlayerObject(String playerName) {
-        PlayerInstance p = GameState.getGameInstance().getPlayerInstance(playerName);
-        if(p == null){
-            this.playerName = "Not created yet.";
-            return;
+    public PlayerObject(String playerName, boolean createNew) {
+        PlayerInstance playerInstance;
+        if (createNew) {
+            playerInstance = GameState.getGameInstance().createPlayerInstance(playerName);
+        }else {
+            playerInstance = GameState.getGameInstance().getPlayerInstance(playerName);
         }
-        this.playerName = playerName;
-        identifier = p.getIdentifiers();
-        crewInfo = p.getPlayer();
+        this.playerName = playerInstance.getPlayerName();
+        identifier = playerInstance.getIdentifiers();
+        crewInfo = playerInstance.getPlayer();
+        playerHashCode = crewInfo.hashCode();
     }
 
 }

@@ -1,6 +1,5 @@
 package com.UPBEATGame.Game.UPBEAT.GameLogics.Player;
 
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.Player;
 import com.UPBEATGame.Game.UPBEAT.GameLogics.Region.Region;
 
 import java.util.Map;
@@ -14,7 +13,7 @@ public interface PlayerInstance {
     Region getCurrentRegion();
     Region getCityCenter();
     long getBudget();
-    
+    String getPlayerName();
     boolean attack(Direction dir, long v);
     boolean collect(long v);
     boolean invest(long eval);

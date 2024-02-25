@@ -2,8 +2,12 @@ package com.UPBEATGame.Game;
 
 import com.UPBEATGame.Game.UPBEAT.GameLogics.Engine.GameState;
 import com.UPBEATGame.Game.UPBEAT.GameLogics.Engine.GameUPBEAT;
+import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.PlayerInstance;
 import com.UPBEATGame.Game.UPBEAT.GameLogics.Region.Territory;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -12,15 +16,15 @@ public class UpbeatGameController {
     private static final GameUPBEAT gameUPBEAT = GameState.getGameInstance();
 
     @PostMapping({"/player"})
-    public String createPlayer(@RequestBody String body) {
-        gameUPBEAT.createPlayerInstance(body);
-        return "created " + body;
+    public PlayerObject createPlayer(@RequestBody String body) {
+
+        return new PlayerObject(body, true);
     }
 
     @GetMapping("/player/{name}")
     public PlayerObject getPlayer(@PathVariable String name){
         System.out.println(name);
-        return new PlayerObject(name);
+        return new PlayerObject(name, false);
     }
 
     @PutMapping("/constructionPlan/{name}/{constructionPlan}")
@@ -37,5 +41,15 @@ public class UpbeatGameController {
     @GetMapping({"/territory"})
     public Territory getTerritory() {
         return gameUPBEAT.getTerritory();
+    }
+
+    @GetMapping({"/players"})
+    public List<PlayerObject> getAllPlayer(){
+        List<PlayerInstance> playerInstances = gameUPBEAT.getPlayers();
+        List<PlayerObject> playerObjects = new ArrayList<>();
+        for (PlayerInstance playerInstance: playerInstances){
+            playerObjects.add(new PlayerObject(playerInstance.getPlayerName(), false));
+        }
+        return playerObjects;
     }
 }
