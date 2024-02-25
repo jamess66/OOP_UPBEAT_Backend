@@ -1,7 +1,10 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import "../component/ui/hexagom.css";
 import "../component/ui/prompt.css";
 import "../component/ui/profile.css";
+import "../component/ui/Round.css";
+import "../component/ui/Time.css";
 
 function Hexagon() {
   const column = 15;
@@ -10,11 +13,17 @@ function Hexagon() {
   const arr: number[] = Array(column).fill(0) || [];
   const arr2: number[][] = Array(row).fill(arr) || [];
 
+  const [isVisible, setIsVisible] = useState(false);
+
+  const handleClick = () => {
+    setIsVisible(!isVisible);
+  };
+
   return (
     <div
       style={{
-        marginTop: "20px",
-        marginLeft: "50%",
+        marginTop: "45px",
+        marginLeft: "45%",
       }}
     >
       {arr2.map((data, key) => {
@@ -43,8 +52,27 @@ function Hexagon() {
           </div>
         );
       })}
+      <div className="Round"> ROUND :</div>
+      <div className="Time">TIME :</div>
       <div className="box">
-        <button className="Profile">Profile</button>
+        {!isVisible && (
+          <button
+            className={`Profile ${isVisible ? "hidden" : ""}`}
+            onClick={handleClick}
+          >
+            Profile
+          </button>
+        )}
+        {isVisible && (
+          <div
+            className={`Profilehidden ${isVisible ? "" : "hidden"}`}
+            onClick={handleClick}
+          >
+            Player1 :
+            <br />
+            Coin :
+          </div>
+        )}
         <div className="box_cover"></div>
       </div>
       <form className="input">

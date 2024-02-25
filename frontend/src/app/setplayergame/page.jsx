@@ -13,7 +13,7 @@ function playergame() {
               placeholder=" / Write your name "
             />
           </form>
-          <div className="component-setplayergame-fronts mt-4">
+          {/* <div className="component-setplayergame-fronts mt-4">
             CODE
             <form>
               <input
@@ -22,7 +22,7 @@ function playergame() {
                 placeholder=" /code "
               />
             </form>
-          </div>
+          </div> */}
           <div>
             <Link href="/gamestate">
               <button className="buttonjoin">JOIN GAME</button>

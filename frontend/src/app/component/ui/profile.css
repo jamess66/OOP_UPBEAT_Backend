@@ -11,4 +11,29 @@
   align-items: center;
   justify-content: center;
   font-family: "Anakotmai";
+  color: aliceblue;
+  font-weight: bold;
+}
+
+.Profilehidden {
+  font-weight: bold;
+  margin-left: -15px;
+  margin-top: -20px;
+  width: 550px;
+  height: 140px;
+  flex-shrink: 0;
+  border-radius: 50px 50px 50px 50px;
+  border: 1px solid #000;
+  background: #1d2b53;
+  font-size: 28px;
+  align-items: center;
+  padding-left: 60px;
+  padding-top: 20px;
+  justify-content: center;
+  font-family: "Anakotmai";
+  color: aliceblue;
+}
+
+.hidden {
+  display: none;
 }
