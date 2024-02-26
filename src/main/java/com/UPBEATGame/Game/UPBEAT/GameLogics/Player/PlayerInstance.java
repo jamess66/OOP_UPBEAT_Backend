@@ -14,6 +14,7 @@ public interface PlayerInstance {
     Region getCityCenter();
     long getBudget();
     String getPlayerName();
+    boolean done();
     boolean attack(Direction dir, long v);
     boolean collect(long v);
     boolean invest(long eval);
@@ -30,4 +31,5 @@ public interface PlayerInstance {
     void newConstructionPlan(String string);
     void newConstructionPlan();
     void actionExecute();
+    int getPlayerTurn();
 }

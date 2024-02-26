@@ -23,14 +23,16 @@ import static com.UPBEATGame.Game.UPBEAT.ConstructionParser.Tokenizer.ReadConstr
 public class CrewCommands implements PlayerInstance {
     private final String playerName;
     private final Player player;
+    private final int tern;
     private final Territory territory;
     private String constructionPlan;
     private List<Exec> parsedExec;
     private final Map<String, Long> boundVar;
-    public CrewCommands(String playerName , Player player, Territory territory){
+    public CrewCommands(String playerName , Player player, Territory territory, int tern){
         this.playerName = playerName;
         this.player = player;
         this.territory = territory;
+        this.tern = tern;
         constructionPlan = "done";
         Parser parser = new ConsParser(new ConsTokenizer(constructionPlan));
         parsedExec = parser.Parse();
@@ -60,7 +62,8 @@ public class CrewCommands implements PlayerInstance {
 
     @Override
     public void newConstructionPlan(String string){
-            constructionPlan = string;
+        if(!constructionPlan.equals(string)) player.payCost(1);
+        constructionPlan = string;
     }
 
     @Override
@@ -87,6 +90,12 @@ public class CrewCommands implements PlayerInstance {
     public String getPlayerName() {
         return playerName;
     }
+
+    @Override
+    public boolean done() {
+        return GameCommands.done();
+    }
+
     @Override
     public long nearby(Utility.Direction dir) {
         return InformationExpression.nearby(territory, player, dir);
@@ -151,6 +160,11 @@ public class CrewCommands implements PlayerInstance {
     @Override
     public Region getCityCenter() {
         return player.getCityCenter();
+    }
+
+    @Override
+    public int getPlayerTurn(){
+        return this.tern;
     }
 
     @Override

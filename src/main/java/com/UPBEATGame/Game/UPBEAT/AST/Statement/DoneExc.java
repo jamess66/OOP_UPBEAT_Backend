@@ -6,7 +6,7 @@ import static com.UPBEATGame.Game.UPBEAT.AST.Node.*;
 
 public class DoneExc extends Exec {
     @Override
-    public boolean execute(PlayerInstance game) {
-        return true;
+    public boolean execute(PlayerInstance command) {
+        return command.done();
     }
 }

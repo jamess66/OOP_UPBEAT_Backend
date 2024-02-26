@@ -22,8 +22,8 @@ public class GameCommandTest {
 
     @Test
     public void testGetPlayerInstance(){
-        PlayerInstance player1 = gameState.createPlayerInstance("james");
-        PlayerInstance player2 = gameState.createPlayerInstance("john");
+        PlayerInstance player1 = gameState.createPlayerInstance("james",1);
+        PlayerInstance player2 = gameState.createPlayerInstance("john",2);
 
         assertEquals(player1, GameState.getGameInstance().getPlayerInstance("james"));
         assertEquals(player2, GameState.getGameInstance().getPlayerInstance("john"));

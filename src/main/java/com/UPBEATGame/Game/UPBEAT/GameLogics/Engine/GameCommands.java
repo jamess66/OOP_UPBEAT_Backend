@@ -13,7 +13,7 @@ import static com.UPBEATGame.Game.UPBEAT.GameLogics.Utility.isPlayerOwner;
 
 public class GameCommands {
 
-    static boolean done(){
+    public static boolean done(){
         return false;
     }
 
