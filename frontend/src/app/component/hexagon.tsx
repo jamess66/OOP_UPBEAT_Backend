@@ -1,5 +1,6 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
+import axios from "axios";
 import "../component/ui/hexagom.css";
 import "../component/ui/prompt.css";
 import "../component/ui/profile.css";
@@ -16,22 +17,32 @@ interface HexRegion {
 
 interface HexGrid {
   grid: HexRegion[][];
-  row: number;
-  col: number;
+  rows: number;
+  cols: number;
 }
+interface Crew {
+  budget: number;
+  cityCenter: string;
+}
+interface CrewCommands {
+  constructionPlan: string;
+  playerName: string;
+}
+interface PlayerInstance {
+  playerName: string;
+  budget: number;
+}
+const api = "http://localhost:8080";
+const fetchData = async () => {
+  const response = await axios.get(api + "/territory");
+  return response.data;
+};
 
-async function fetchUsers(): Promise<HexGrid[]> {
-  const response = await fetch("http://localhost:8080/territory");
-  const data = await response.json();
-  return data;
-}
+const fetchPlayer = async () => {
+  const response = await axios.get(api + "/player");
+  return response.data;
+};
 
-function CreateHexagon() {
-  const [Hexagon, setHexagon] = useState<HexGrid[]>([]);
-  useEffect(() => {
-    fetchUsers().then((data) => setHexagon(data));
-  }, []);
-}
 function ProfileBox({
   isVisible,
   handleClick,
@@ -39,6 +50,21 @@ function ProfileBox({
   isVisible: boolean;
   handleClick: () => void;
 }) {
+  const [Player, setPlayer] = useState<PlayerInstance>({
+    playerName: "",
+    budget: 0,
+  });
+
+  useEffect(() => {
+    fetchData()
+      .then((data: PlayerInstance) => {
+        setPlayer(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  console.log(Player.playerName);
   return (
     <div className="box">
       {!isVisible && (
@@ -77,25 +103,35 @@ function InputForm() {
 }
 
 function Hexagon() {
-  const column = 15;
-  const row = 20;
+  const [HexGrid, setHexGrid] = useState<HexGrid>({
+    grid: [],
+    rows: 0,
+    cols: 0,
+  });
 
-  const arr: number[] = Array(column).fill(0) || [];
-  const arr2: number[][] = Array(row).fill(arr) || [];
+  useEffect(() => {
+    fetchData()
+      .then((data: HexGrid) => {
+        setHexGrid(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  // console.log(HexGrid.rows);
+  // console.log(HexGrid.cols);
+
+  // const column = 15;
+  // const row = 20;
+
+  const arr: number[] = Array(HexGrid.cols).fill(0) || [];
+  const arr2: number[][] = Array(HexGrid.rows).fill(arr) || [];
 
   const [isVisible, setIsVisible] = useState(false);
   const [zoom, setZoom] = useState(1);
 
   const handleClick = () => {
     setIsVisible(!isVisible);
-  };
-
-  const zoomIn = () => {
-    setZoom((prevZoom) => prevZoom + 0.1);
-  };
-
-  const zoomOut = () => {
-    setZoom((prevZoom) => prevZoom - 0.1);
   };
 
   return (
