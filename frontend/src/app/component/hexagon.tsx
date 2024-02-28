@@ -1,6 +1,12 @@
 "use client";
 import React, { useEffect, useState, ChangeEvent } from "react";
 import axios from "axios";
+import {
+  TransformWrapper,
+  TransformComponent,
+  useControls,
+} from "react-zoom-pan-pinch";
+
 import "../component/ui/hexagom.css";
 import "../component/ui/prompt.css";
 import "../component/ui/profile.css";
@@ -107,6 +113,18 @@ function InputForm() {
           resize: "none",
         }}
       ></textarea>
+      <div>
+        <button
+          className=" bg-lime-500 size-7/12 min-h-12 uppercase rounded-2xl"
+          style={{
+            marginLeft: "85px",
+            fontFamily: "Anakotmai",
+            fontWeight: "bold",
+          }}
+        >
+          submit
+        </button>
+      </div>
     </form>
   );
 }
@@ -127,11 +145,24 @@ function Hexagon() {
         console.log(error);
       });
   }, []);
-  // console.log(HexGrid.rows);
-  // console.log(HexGrid.cols);
-
-  const column = 15;
-  const row = 20;
+  const [HexRegion, setHexregion] = useState<HexRegion>({
+    ownerHashcode: 0,
+    deposit: 0,
+    max_deposit: 0,
+    x: 0,
+    y: 0,
+  });
+  useEffect(() => {
+    fetchData()
+      .then((data: HexRegion) => {
+        setHexregion(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  // const column = 15;
+  // const row = 20;
 
   const arr: number[] = Array(HexGrid.cols).fill(0) || [];
   const arr2: number[][] = Array(HexGrid.rows).fill(arr) || [];
@@ -139,9 +170,25 @@ function Hexagon() {
   const [isVisible, setIsVisible] = useState(false);
   const [zoom, setZoom] = useState(1);
 
+  const Controls = () => {
+    const { zoomIn, zoomOut, resetTransform } = useControls();
+    return (
+      <>
+        <button className=" bg-orange-300" onClick={() => zoomIn()}>
+          Zoom In
+        </button>
+        <button onClick={() => zoomOut()}>Zoom Out</button>
+        <button onClick={() => resetTransform()}>Reset</button>
+      </>
+    );
+  };
   const handleClick = () => {
     setIsVisible(!isVisible);
   };
+
+  const hexSize = 50; // Set this to the size of your hexagons
+  const gridWidth = HexGrid.cols * hexSize;
+  const gridHeight = HexGrid.rows * hexSize;
 
   return (
     <div
@@ -162,7 +209,7 @@ function Hexagon() {
           flexShrink: 0,
         }}
       >
-        <div className="Round"> ROUND :</div>
+        {/* <div className="Round"> ROUND :</div> */}
         <div className="Time">TIME :</div>
         <ProfileBox isVisible={isVisible} handleClick={handleClick} />
         <InputForm />
@@ -170,51 +217,60 @@ function Hexagon() {
       <div
         style={{
           marginTop: "45px",
-          marginLeft: "20%",
+          marginLeft: "-100%",
           flexDirection: "row-reverse",
           justifyContent: "flex-end",
+          width: `${gridWidth}px`,
+          height: `${gridHeight}px`,
+          overflow: "auto",
+          border: "5px solid green",
         }}
       >
-        {arr2.map((data, y) => {
-          return (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "flex-end",
-              }}
-              key={y}
-            >
-              {data.map((data2, x) => {
-                return (
-                  <div
-                    key={x}
-                    style={{
-                      transform: `translate(-${(35 * x) / 4}px, ${
-                        x % 2 === 0 ? "21px" : "0px"
-                      })`,
-                      marginTop: x % 2 === 0 ? "3px" : "0px",
-                    }}
-                    className={"hex-grid-content"}
-                  >
-                    <div
-                      style={{
-                        position: "relative",
-                        color: "black",
-                        fontSize: "10px",
-                        alignItems: "center",
-                        transform: `translate(-50%, -50%)`,
-                        top: "50%",
-                        left: "50%",
-                      }}
-                    >
-                      {`(${x}, ${y})`}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          );
-        })}
+        <TransformWrapper>
+          <Controls />
+          <TransformComponent>
+            {arr2.map((data, y) => {
+              return (
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                  }}
+                  key={y}
+                >
+                  {data.map((data2, x) => {
+                    return (
+                      <div
+                        key={x}
+                        style={{
+                          transform: `translate(-${(35 * x) / 4}px, ${
+                            x % 2 === 0 ? "21px" : "0px"
+                          })`,
+                          marginTop: x % 2 === 0 ? "3px" : "0px",
+                        }}
+                        className={"hex-grid-content"}
+                      >
+                        <div
+                          style={{
+                            position: "relative",
+                            color: "black",
+                            fontSize: "10px",
+                            alignItems: "center",
+                            transform: `translate(-50%, -50%)`,
+                            top: "50%",
+                            left: "50%",
+                          }}
+                        >
+                          {`(${HexRegion.x}, ${HexRegion.y})`}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+            })}
+          </TransformComponent>
+        </TransformWrapper>
       </div>
     </div>
   );
