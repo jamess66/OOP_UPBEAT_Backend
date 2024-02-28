@@ -38,6 +38,9 @@ public class Crew implements Player{
 
     private void randomSpawn(Territory territory){
         Region region = Utility.getRandomRegion(territory);
+        while(region.getOwner() != null){
+            region = Utility.getRandomRegion(territory);
+        }
         region.updateOwner(this);
         this.cityCenter = region;
         this.currentRegion = region;

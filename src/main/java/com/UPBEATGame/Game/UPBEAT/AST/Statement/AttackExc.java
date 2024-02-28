@@ -16,9 +16,6 @@ public class AttackExc extends Exec {
 
     @Override
     public boolean execute(PlayerInstance command) {
-        return command.attack(
-                direction,
-                expression.eval(command)
-        );
+        return command.attack(direction, expression.eval(command));
     }
 }

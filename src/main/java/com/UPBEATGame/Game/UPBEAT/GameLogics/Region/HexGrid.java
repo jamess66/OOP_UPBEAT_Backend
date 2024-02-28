@@ -1,6 +1,7 @@
 package com.UPBEATGame.Game.UPBEAT.GameLogics.Region;
 
 import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.Crew;
+import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.Player;
 import lombok.Getter;
 
 @Getter
@@ -16,11 +17,10 @@ public class HexGrid implements Territory{
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
                 grid[i][j] = new HexRegion(i, j);
+
             }
 
         }
-
-       // grid[5][5].updateOwner(new Crew(this));
     }
 
 
@@ -42,6 +42,29 @@ public class HexGrid implements Territory{
     @Override
     public Region[][] getGrid(){
         return grid;
+    }
+
+    @Override
+    public void removeLosePlayerRegion(Player player) {
+        for (Region[] regions : grid) {
+            for (Region region : regions) {
+                if (player.equals(region.getOwner())) {
+                    region.updateOwner(null);
+                }
+            }
+        }
+    }
+
+    @Override
+    public boolean isAllClaimed() {
+        for (Region[] regions : grid) {
+            for (Region region : regions) {
+                if (region.getOwner() == null) {
+                   return false;
+                }
+            }
+        }
+        return true;
     }
 
 }

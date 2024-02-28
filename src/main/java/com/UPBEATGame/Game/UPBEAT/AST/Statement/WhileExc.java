@@ -20,9 +20,8 @@ public class WhileExc extends Exec {
     public boolean execute(PlayerInstance command) {
         while (condition.eval(command) > 0 && executionRemain >= 0){
             IfExc ifExc = new IfExc(new NumberExp(executionRemain), statement, new BlockExc(new ArrayList<>()));
-            if(ifExc.execute(command)){
-                executionRemain--;
-            }
+            ifExc.execute(command);
+            executionRemain--;
         }
         if(next != null) return next.execute(command);
         else return false;

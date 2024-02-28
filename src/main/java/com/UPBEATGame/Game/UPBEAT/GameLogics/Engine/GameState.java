@@ -54,4 +54,8 @@ public class GameState implements GameUPBEAT {
         return new ArrayList<>(players.values());
     }
 
+    public Map<String, PlayerInstance> getPlayersMap(){
+        return players;
+    }
+
 }
