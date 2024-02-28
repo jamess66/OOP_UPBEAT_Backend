@@ -19,6 +19,7 @@ public class PlayerObject {
     private long playerHashCode;
     private Player crewInfo;
     private Boolean isPlayerTurn;
+    private String color;
     @JsonIgnore
     private int playerTurn;
 
@@ -27,10 +28,10 @@ public class PlayerObject {
 
     @JsonIgnore
 
-    public PlayerObject(String playerName, boolean createNew, int count) {
+    public PlayerObject(String playerName, boolean createNew, int count, String color) {
         PlayerInstance playerInstance;
         if (createNew) {
-            playerInstance = GameState.getGameInstance().createPlayerInstance(playerName, count);
+            playerInstance = GameState.getGameInstance().createPlayerInstance(playerName, count, color);
         }else {
             playerInstance = GameState.getGameInstance().getPlayerInstance(playerName);
         }
@@ -40,6 +41,7 @@ public class PlayerObject {
         playerHashCode = crewInfo.hashCode();
         playerTurn = playerInstance.getPlayerTurn();
         setIsPlayerTurn();
+        this.color = color;
     }
 
     void setIsPlayerTurn(){

@@ -20,7 +20,7 @@ public class HexGrid implements Territory{
 
         }
 
-        grid[5][5].updateOwner(new Crew(this));
+       // grid[5][5].updateOwner(new Crew(this));
     }
 
 

@@ -12,6 +12,7 @@ public class InvestExc extends Exec {
 
     @Override
     public boolean execute(PlayerInstance command) {
-        return command.collect(expr.eval(command));
+        System.out.println("invest");
+        return command.invest(expr.eval(command));
     }
 }

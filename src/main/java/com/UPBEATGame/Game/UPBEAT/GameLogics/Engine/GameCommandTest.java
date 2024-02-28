@@ -13,7 +13,7 @@ public class GameCommandTest {
 
     Territory testWorld = gameState.getTerritory();
 
-    PlayerInstance player1 = gameState.createPlayerInstance("jeff", 5,5);
+    PlayerInstance player1 = gameState.createPlayerInstance("jeff", 5,5, "55");
 
     @Test
     public void testGetGameInstance(){
@@ -22,8 +22,8 @@ public class GameCommandTest {
 
     @Test
     public void testGetPlayerInstance(){
-        PlayerInstance player1 = gameState.createPlayerInstance("james",1);
-        PlayerInstance player2 = gameState.createPlayerInstance("john",2);
+        PlayerInstance player1 = gameState.createPlayerInstance("james",1, "55");
+        PlayerInstance player2 = gameState.createPlayerInstance("john",2, "66");
 
         assertEquals(player1, GameState.getGameInstance().getPlayerInstance("james"));
         assertEquals(player2, GameState.getGameInstance().getPlayerInstance("john"));
@@ -134,6 +134,8 @@ public class GameCommandTest {
         player1.actionExecute();
         System.out.println(player1.getIdentifiers().get("x"));
 
+        player1.newConstructionPlan("while (1) moved = moved + 1 ");
+        System.out.println(player1.getIdentifiers().get("moved"));
 
     }
 

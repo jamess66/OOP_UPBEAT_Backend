@@ -18,10 +18,11 @@ public class UpbeatGameController {
     protected static int playerSubmittedCount = 0;
     private static int globalTurn = 0;
 
+    private static final String[] colors = new String[]{"FFCCAA", "83769C", "B1FFAA", "F8741C", "5", "6"};
     @PostMapping({"/player"})
     public PlayerObject createPlayer(@RequestBody String body) {
         if(gameUPBEAT.getPlayers().isEmpty()) globalTurn = 1;
-        PlayerObject playerObject = new PlayerObject(body, true, playerCount);
+        PlayerObject playerObject = new PlayerObject(body, true, playerCount, colors[playerCount]);
         playerCount++;
         return playerObject;
     }
@@ -29,7 +30,7 @@ public class UpbeatGameController {
     @GetMapping("/player/{name}")
     public PlayerObject getPlayer(@PathVariable String name){
         System.out.println(name);
-        return new PlayerObject(name, false, gameUPBEAT.getPlayerInstance(name).getPlayerTurn());
+        return new PlayerObject(name, false, gameUPBEAT.getPlayerInstance(name).getPlayerTurn(), gameUPBEAT.getPlayerInstance(name).getPlayer().getColor());
     }
 
     @GetMapping("/globalTerns")
@@ -61,7 +62,7 @@ public class UpbeatGameController {
         List<PlayerInstance> playerInstances = gameUPBEAT.getPlayers();
         List<PlayerObject> playerObjects = new ArrayList<>();
         for (PlayerInstance playerInstance: playerInstances){
-            PlayerObject playerObject = new PlayerObject(playerInstance.getPlayerName(), false, playerInstance.getPlayerTurn());
+            PlayerObject playerObject = new PlayerObject(playerInstance.getPlayerName(), false, playerInstance.getPlayerTurn(), playerInstance.getPlayer().getColor());
             playerObject.setIsPlayerTurn();
             playerObjects.add(playerObject);
         }

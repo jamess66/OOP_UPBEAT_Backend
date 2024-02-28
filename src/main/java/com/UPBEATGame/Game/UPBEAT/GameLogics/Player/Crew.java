@@ -17,16 +17,19 @@ public class Crew implements Player{
     private long budget;
     private Region cityCenter;
     private Region currentRegion;
+    private String color;
 
-    public Crew(Territory territory) {
+    public Crew(Territory territory, String color) {
         this.budget = ConfigLoader.getInit_budget();
+        this.color = color;
         randomSpawn(territory);
     }
 
     @JsonCreator
-    public Crew(Territory territory, int x, int y){ // fixed spawn point **for testing only**
+    public Crew(Territory territory, int x, int y, String color){ // fixed spawn point **for testing only**
         this.budget = ConfigLoader.getInit_budget();
         Region region = territory.getRegion(x,y);
+        this.color = color;
         this.currentRegion = region;
         this.cityCenter = region;
         this.cityCenter.updateDeposit(true , ConfigLoader.init_center_dep);

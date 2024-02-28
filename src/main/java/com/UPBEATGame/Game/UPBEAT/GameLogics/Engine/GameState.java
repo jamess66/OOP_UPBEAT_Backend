@@ -31,17 +31,17 @@ public class GameState implements GameUPBEAT {
         return gameInstance;
     }
 
-    public PlayerInstance createPlayerInstance(String name, int tern) {
+    public PlayerInstance createPlayerInstance(String name, int tern, String color) {
         System.out.println("createPlayerInstance " + name);
         if(!players.containsKey(name)){
-            players.put(name, new CrewCommands(name, new Crew(territory), territory, tern));
+            players.put(name, new CrewCommands(name, new Crew(territory, color), territory, tern));
         }
         return players.get(name);
     }
 
-    public PlayerInstance createPlayerInstance(String name, int x, int y) { // fixed spawn position for test only
+    public PlayerInstance createPlayerInstance(String name, int x, int y, String color) { // fixed spawn position for test only
         if(!players.containsKey(name)){
-            players.put(name, new CrewCommands(name, new Crew(territory, x, y), territory, 0));
+            players.put(name, new CrewCommands(name, new Crew(territory, x, y, color), territory, 0));
         }
         return players.get(name);
     }

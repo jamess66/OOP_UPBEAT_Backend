@@ -21,14 +21,14 @@ public class CommandTest {
 
     Territory testWorld = GameState.getGameInstance().getTerritory();
 
-    PlayerInstance player1 = GameState.getGameInstance().createPlayerInstance("james", 5, 5);
+    PlayerInstance player1 = GameState.getGameInstance().createPlayerInstance("james", 5, 5, "55");
 
 
-    PlayerInstance player2 = GameState.getGameInstance().createPlayerInstance("james", 5, 5);
+    PlayerInstance player2 = GameState.getGameInstance().createPlayerInstance("james", 5, 5, "66");
 
     @Test
     public void testNearby(){
-        Player testPlayer = new Crew(testWorld);
+        Player testPlayer = new Crew(testWorld, "00");
         assertEquals(0, player2.nearby(Utility.Direction.Up));
 
         testWorld.getRegion(1,5).updateOwner(testPlayer);
@@ -38,7 +38,7 @@ public class CommandTest {
 
     @Test
     public void testOpponent(){
-        Player testPlayer = new Crew(testWorld);
+        Player testPlayer = new Crew(testWorld, "00");
         assertEquals(0, player1.opponent()); // not found
 
         testWorld.getRegion(1,5).updateOwner(testPlayer);
@@ -112,7 +112,7 @@ public class CommandTest {
 
     @Test
     public void testMoveToEnemyRegion(){
-        Player testPlayer = new Crew(testWorld);
+        Player testPlayer = new Crew(testWorld, "00");
         testWorld.getRegion(7, 5).updateOwner(testPlayer);
 
         assertEquals(testWorld.getRegion(5, 5), player1.getCurrentRegion());
@@ -153,7 +153,7 @@ public class CommandTest {
 
     @Test
     public void testShoot(){
-        Player testPlayer = new Crew(testWorld);
+        Player testPlayer = new Crew(testWorld, "00");
         testWorld.getRegion(6,5).updateOwner(testPlayer);
         testWorld.getRegion(6,5).updateDeposit(true,20);
         assertEquals(20, testWorld.getRegion(6,5).getDeposit());
