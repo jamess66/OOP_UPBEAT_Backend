@@ -44,8 +44,8 @@ const fetchData = async () => {
   return response.data;
 };
 
-const fetchPlayer = async () => {
-  const response = await axios.get(api + "/player");
+const xy = async () => {
+  const response = await axios.get(api + "/");
   return response.data;
 };
 
@@ -135,7 +135,6 @@ function Hexagon() {
     rows: 0,
     cols: 0,
   });
-
   useEffect(() => {
     fetchData()
       .then((data: HexGrid) => {
@@ -145,6 +144,7 @@ function Hexagon() {
         console.log(error);
       });
   }, []);
+  console.log(HexGrid.grid);
   const [HexRegion, setHexregion] = useState<HexRegion>({
     ownerHashcode: 0,
     deposit: 0,
@@ -161,8 +161,6 @@ function Hexagon() {
         console.log(error);
       });
   }, []);
-  // const column = 15;
-  // const row = 20;
 
   const arr: number[] = Array(HexGrid.cols).fill(0) || [];
   const arr2: number[][] = Array(HexGrid.rows).fill(arr) || [];
@@ -229,24 +227,24 @@ function Hexagon() {
         <TransformWrapper>
           <Controls />
           <TransformComponent>
-            {arr2.map((data, y) => {
+            {arr2.map((data, i) => {
               return (
                 <div
                   style={{
                     display: "flex",
                     justifyContent: "flex-end",
                   }}
-                  key={y}
+                  key={i}
                 >
-                  {data.map((data2, x) => {
+                  {data.map((data2, j) => {
                     return (
                       <div
-                        key={x}
+                        key={j}
                         style={{
-                          transform: `translate(-${(35 * x) / 4}px, ${
-                            x % 2 === 0 ? "21px" : "0px"
+                          transform: `translate(-${(35 * j) / 4}px, ${
+                            j % 2 === 0 ? "21px" : "0px"
                           })`,
-                          marginTop: x % 2 === 0 ? "3px" : "0px",
+                          marginTop: j % 2 === 0 ? "3px" : "0px",
                         }}
                         className={"hex-grid-content"}
                       >
@@ -261,7 +259,7 @@ function Hexagon() {
                             left: "50%",
                           }}
                         >
-                          {`(${HexRegion.x}, ${HexRegion.y})`}
+                          {`(${HexGrid.grid[i][j].deposit}, ${HexGrid.grid[i][j].deposit})`}
                         </div>
                       </div>
                     );
