@@ -1,5 +1,5 @@
 "use client";
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState, ChangeEvent } from "react";
 import axios from "axios";
 import "../component/ui/hexagom.css";
 import "../component/ui/prompt.css";
@@ -85,19 +85,28 @@ function ProfileBox({
           Coin :
         </div>
       )}
-      <div className="box_cover"></div>
+      {/* <div className="box_cover"></div> */}
     </div>
   );
 }
 
 function InputForm() {
+  const [value, setValue] = useState("");
+
+  const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setValue(event.target.value);
+  };
   return (
     <form className="input">
-      <input
-        type="input"
+      <textarea
+        value={value}
+        onChange={handleChange}
         placeholder=" / Write command here"
         className="input_box"
-      ></input>
+        style={{
+          resize: "none",
+        }}
+      ></textarea>
     </form>
   );
 }
@@ -121,8 +130,8 @@ function Hexagon() {
   // console.log(HexGrid.rows);
   // console.log(HexGrid.cols);
 
-  // const column = 15;
-  // const row = 20;
+  const column = 15;
+  const row = 20;
 
   const arr: number[] = Array(HexGrid.cols).fill(0) || [];
   const arr2: number[][] = Array(HexGrid.rows).fill(arr) || [];

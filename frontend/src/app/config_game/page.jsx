@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import ConfigList from "../component/configList";
 import axios from "axios";
+import "../styles/setplayergame.css";
 async function fetchUsers() {
   try {
     const response = await axios.get(
@@ -113,6 +114,19 @@ const ConfigurationPanel = ({ disable }) => {
           </div>
         </div>
       ))}
+      <button
+        className="buttonback justify-center text-white justify-items-center items-center"
+        id="forbackstep"
+      >
+        Back
+      </button>
+      <button
+        className="buttonback justify-center text-white justify-items-center items-center"
+        id=""
+      >
+        {" "}
+        Save{" "}
+      </button>
     </div>
   );
 };

@@ -1,14 +1,15 @@
 .input {
   margin-left: -82%;
-  margin-top: -13%;
+  margin-top: -160%;
 }
 .input_box {
   width: 450px;
+  height: 760px;
   border-radius: 50px;
-  padding: 10px 20px 10px;
+  padding: 20px 20px 700px;
   transition: 0.2s;
   font-size: 18px;
-  justify-items: auto;
+  /* justify-items: auto; */
   align-items: center;
   border: 1px solid black;
   font-family: "Anakotmai";

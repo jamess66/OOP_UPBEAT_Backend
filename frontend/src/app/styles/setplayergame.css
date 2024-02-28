@@ -62,3 +62,11 @@
   background: gray;
   width: 200px;
 }
+
+#forbackstep {
+  margin-top: 1%;
+  margin-left: 38%;
+}
+#forsave {
+  background-color: greenyellow;
+}
