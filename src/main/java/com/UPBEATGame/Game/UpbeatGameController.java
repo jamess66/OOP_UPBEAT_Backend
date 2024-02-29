@@ -4,9 +4,11 @@ import com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.GameDataInstance;
 import com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.GameUPBEAT;
 import com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.PlayerInstance;
 import com.UPBEATGame.Game.UPBEAT.GameLogics.Region.Territory;
+import com.UPBEATGame.Game.UPBEAT.GameLogics.Utility;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @CrossOrigin
@@ -17,14 +19,23 @@ public class UpbeatGameController {
     private static int playerCount = 0;
     protected static int playerSubmittedCount = 0;
     private static int globalTurn = 1;
-    private static final String[] colors = new String[]{"#ffc266", "#99d6ff", "#85e085", "#ff99dd", "#fbde6a", "#ff4d67", "#ffa07a"};
+    private static List<String> PlayerColorList = new ArrayList<>();
+
+    static {
+        PlayerColorList.addAll(List.of(new String[]{"#FF6D6A", "#99d6ff", "#85e085", "#ff99dd", "#fbde6a", "#ff4d67", "#ffa07a"}));
+    }
 
     @PostMapping({"/player"})
     public PlayerObject createPlayer(@RequestBody String body) {
         if(gameUPBEAT.getTerritory().isAllClaimed()) return null;
         //if(gameUPBEAT.getPlayers().isEmpty()) globalTurn = 1;
-        PlayerObject playerObject = new PlayerObject(body, true, playerCount, colors[playerCount]);
+        int randomInt = (int) Math.abs(Utility.getRandomNumber() % PlayerColorList.size());
+        String randColor = PlayerColorList.get(randomInt);
+        PlayerColorList.remove(randomInt);
+        System.out.println(randColor);
+        PlayerObject playerObject = new PlayerObject(body, true, playerCount, randColor);
         playerCount++;
+
         return playerObject;
     }
 

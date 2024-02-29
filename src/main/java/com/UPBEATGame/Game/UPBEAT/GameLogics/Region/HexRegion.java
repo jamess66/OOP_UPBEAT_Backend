@@ -66,7 +66,7 @@ public class HexRegion implements Region{
     public void updateOwner(Player owner) {
         this.owner = owner;
         if(owner == null){
-            regionColor = "#ffffff";
+            regionColor = "#FFFFFF";
         }else regionColor = owner.getColor();
 
     }

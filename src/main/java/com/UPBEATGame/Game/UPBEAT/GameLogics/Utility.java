@@ -66,11 +66,6 @@ public class Utility {
         return region.getRegionX() < rows && region.getRegionX() >= 0 && region.getRegionY() < cols && region.getRegionY() >= 0;
     }
 
-//    public static final int[][][] DIRECTION = new int[][][]{
-//            {{-1, 0}, {0, +1}, {+1, +1}, {+1, 0}, {+1, -1}, {0, -1}}, // even row
-//            {{-1, 0}, {-1, +1}, {0, +1}, {+1, 0}, {0, -1}, {-1, -1}}, // odd row
-//    };
-
     public static Direction IntegerToDirection(int dir){
         return switch (dir){
             case 1 -> Direction.Up;
