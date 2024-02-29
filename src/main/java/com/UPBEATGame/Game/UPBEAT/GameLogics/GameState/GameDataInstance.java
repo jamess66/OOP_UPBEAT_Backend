@@ -54,6 +54,6 @@ public class GameDataInstance implements GameUPBEAT {
 
     public Map<String, PlayerInstance> getPlayersMap(){
         return players;
-    }
+    }   
 
 }
