@@ -1,8 +1,8 @@
 package com.UPBEATGame.Game;
 
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Engine.GameState;
+import com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.GameDataInstance;
 import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.Player;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.PlayerInstance;
+import com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.PlayerInstance;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import lombok.Getter;
@@ -23,17 +23,14 @@ public class PlayerObject {
     @JsonIgnore
     private int playerTurn;
 
-
-
-
     @JsonIgnore
 
     public PlayerObject(String playerName, boolean createNew, int count, String color) {
         PlayerInstance playerInstance;
         if (createNew) {
-            playerInstance = GameState.getGameInstance().createPlayerInstance(playerName, count, color);
+            playerInstance = GameDataInstance.getGameInstance().createPlayerInstance(playerName, count, color);
         }else {
-            playerInstance = GameState.getGameInstance().getPlayerInstance(playerName);
+            playerInstance = GameDataInstance.getGameInstance().getPlayerInstance(playerName);
         }
         this.playerName = playerInstance.getPlayerName();
         identifier = playerInstance.getIdentifiers();

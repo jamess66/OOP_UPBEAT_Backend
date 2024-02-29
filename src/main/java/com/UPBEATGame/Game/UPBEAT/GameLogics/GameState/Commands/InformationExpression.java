@@ -1,4 +1,4 @@
-package com.UPBEATGame.Game.UPBEAT.GameLogics.Engine.Commands;
+package com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.Commands;
 
 import com.UPBEATGame.Game.UPBEAT.Config.ConfigLoader;
 import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.Player;

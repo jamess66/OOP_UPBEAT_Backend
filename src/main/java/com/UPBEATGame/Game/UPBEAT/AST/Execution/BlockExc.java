@@ -1,7 +1,7 @@
-package com.UPBEATGame.Game.UPBEAT.AST.Statement;
+package com.UPBEATGame.Game.UPBEAT.AST.Execution;
 
 import com.UPBEATGame.Game.UPBEAT.AST.Node.Exec;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.PlayerInstance;
+import com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.PlayerInstance;
 
 import java.util.List;
 

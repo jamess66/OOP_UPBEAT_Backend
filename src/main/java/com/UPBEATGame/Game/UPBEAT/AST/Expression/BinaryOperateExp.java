@@ -1,6 +1,6 @@
 package com.UPBEATGame.Game.UPBEAT.AST.Expression;
 
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.PlayerInstance;
+import com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.PlayerInstance;
 import com.UPBEATGame.Game.UPBEAT.AST.ASTErrorException.*;
 import com.UPBEATGame.Game.UPBEAT.AST.Node.*;
 

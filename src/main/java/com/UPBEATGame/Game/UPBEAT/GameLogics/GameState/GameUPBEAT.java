@@ -1,6 +1,5 @@
-package com.UPBEATGame.Game.UPBEAT.GameLogics.Engine;
+package com.UPBEATGame.Game.UPBEAT.GameLogics.GameState;
 
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.PlayerInstance;
 import com.UPBEATGame.Game.UPBEAT.GameLogics.Region.Territory;
 
 import java.util.List;
