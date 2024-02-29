@@ -1,6 +1,5 @@
-package com.UPBEATGame.Game.UPBEAT.GameLogics.Engine;
+package com.UPBEATGame.Game.UPBEAT.GameLogics.GameState;
 
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.PlayerInstance;
 import com.UPBEATGame.Game.UPBEAT.GameLogics.Region.Territory;
 import org.junit.Test;
 
@@ -9,7 +8,7 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 
 public class GameCommandTest {
-    GameUPBEAT gameState = GameState.getGameInstance();
+    GameUPBEAT gameState = GameDataInstance.getGameInstance();
 
     Territory testWorld = gameState.getTerritory();
 
@@ -17,7 +16,7 @@ public class GameCommandTest {
 
     @Test
     public void testGetGameInstance(){
-        assertEquals(gameState, GameState.getGameInstance());
+        assertEquals(gameState, GameDataInstance.getGameInstance());
     }
 
     @Test
@@ -25,8 +24,8 @@ public class GameCommandTest {
         PlayerInstance player1 = gameState.createPlayerInstance("james",1, "55");
         PlayerInstance player2 = gameState.createPlayerInstance("john",2, "66");
 
-        assertEquals(player1, GameState.getGameInstance().getPlayerInstance("james"));
-        assertEquals(player2, GameState.getGameInstance().getPlayerInstance("john"));
+        assertEquals(player1, GameDataInstance.getGameInstance().getPlayerInstance("james"));
+        assertEquals(player2, GameDataInstance.getGameInstance().getPlayerInstance("john"));
     }
 
 

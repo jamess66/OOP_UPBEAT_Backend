@@ -1,7 +1,7 @@
-package com.UPBEATGame.Game.UPBEAT.GameLogics.Engine.Commands;
+package com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.Commands;
 
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Engine.GameState;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.PlayerInstance;
+import com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.GameDataInstance;
+import com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.PlayerInstance;
 import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.Crew;
 import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.Player;
 import com.UPBEATGame.Game.UPBEAT.GameLogics.Region.Region;
@@ -19,12 +19,12 @@ public class CommandTest {
 
 
 
-    Territory testWorld = GameState.getGameInstance().getTerritory();
+    Territory testWorld = GameDataInstance.getGameInstance().getTerritory();
 
-    PlayerInstance player1 = GameState.getGameInstance().createPlayerInstance("james", 5, 5, "55");
+    PlayerInstance player1 = GameDataInstance.getGameInstance().createPlayerInstance("james", 5, 5, "55");
 
 
-    PlayerInstance player2 = GameState.getGameInstance().createPlayerInstance("james", 5, 5, "66");
+    PlayerInstance player2 = GameDataInstance.getGameInstance().createPlayerInstance("james", 5, 5, "66");
 
     @Test
     public void testNearby(){

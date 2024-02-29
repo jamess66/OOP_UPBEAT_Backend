@@ -1,9 +1,7 @@
-package com.UPBEATGame.Game.UPBEAT.GameLogics.Engine;
+package com.UPBEATGame.Game.UPBEAT.GameLogics.GameState;
 
 import com.UPBEATGame.Game.UPBEAT.Config.ConfigLoader;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.CrewCommands;
 import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.Crew;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.PlayerInstance;
 import com.UPBEATGame.Game.UPBEAT.GameLogics.Region.HexGrid;
 import com.UPBEATGame.Game.UPBEAT.GameLogics.Region.Territory;
 import lombok.Getter;
@@ -14,19 +12,19 @@ import java.util.List;
 import java.util.Map;
 
 @Getter
-public class GameState implements GameUPBEAT {
-    private static GameState gameInstance = new GameState();
+public class GameDataInstance implements GameUPBEAT {
+    private static GameDataInstance gameInstance = new GameDataInstance();
     private final Map<String, PlayerInstance> players;
     private final Territory territory;
 
-    private GameState() {
+    private GameDataInstance() {
         territory = new HexGrid((int) ConfigLoader.getRows(), (int) ConfigLoader.getCols());
         players = new HashMap<>();
     }
 
-    public static GameState getGameInstance() {
+    public static GameDataInstance getGameInstance() {
         if(gameInstance == null){
-            gameInstance = new GameState();
+            gameInstance = new GameDataInstance();
         }
         return gameInstance;
     }

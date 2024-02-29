@@ -2,7 +2,7 @@ package com.UPBEATGame.Game.UPBEAT.ConstructionParser;
 
 import static com.UPBEATGame.Game.UPBEAT.AST.Node.Exec;
 
-import com.UPBEATGame.Game.UPBEAT.AST.Statement.AssignmentExc;
+import com.UPBEATGame.Game.UPBEAT.AST.Execution.AssignmentExc;
 import com.UPBEATGame.Game.UPBEAT.ConstructionParser.Tokenizer.ConsTokenizer;
 import org.junit.jupiter.api.Test;
 

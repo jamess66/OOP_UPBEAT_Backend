@@ -1,4 +1,4 @@
-package com.UPBEATGame.Game.UPBEAT.GameLogics.Engine;
+package com.UPBEATGame.Game.UPBEAT.GameLogics.GameState;
 import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.Player;
 import com.UPBEATGame.Game.UPBEAT.GameLogics.Region.Region;
 import com.UPBEATGame.Game.UPBEAT.GameLogics.Region.Territory;

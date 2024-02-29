@@ -1,12 +1,12 @@
-package com.UPBEATGame.Game.UPBEAT.GameLogics.Player;
+package com.UPBEATGame.Game.UPBEAT.GameLogics.GameState;
 
 import com.UPBEATGame.Game.UPBEAT.AST.Node.Exec;
 import com.UPBEATGame.Game.UPBEAT.ConstructionParser.ConsParser;
 import com.UPBEATGame.Game.UPBEAT.ConstructionParser.Parser;
 import com.UPBEATGame.Game.UPBEAT.ConstructionParser.Tokenizer.ConsTokenizer;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Engine.Commands.IdentifierHashMap;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Engine.Commands.InformationExpression;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Engine.GameCommands;
+import com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.Commands.IdentifierHashMap;
+import com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.Commands.InformationExpression;
+import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.Player;
 import com.UPBEATGame.Game.UPBEAT.GameLogics.Region.Region;
 import com.UPBEATGame.Game.UPBEAT.GameLogics.Region.Territory;
 import com.UPBEATGame.Game.UPBEAT.GameLogics.Utility;

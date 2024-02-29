@@ -1,8 +1,8 @@
 package com.UPBEATGame.Game;
 
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Engine.GameState;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Engine.GameUPBEAT;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.PlayerInstance;
+import com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.GameDataInstance;
+import com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.GameUPBEAT;
+import com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.PlayerInstance;
 import com.UPBEATGame.Game.UPBEAT.GameLogics.Region.Territory;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 public class UpbeatGameController {
 
-    private static final GameUPBEAT gameUPBEAT = GameState.getGameInstance();
+    private static final GameUPBEAT gameUPBEAT = GameDataInstance.getGameInstance();
     private static int playerCount = 0;
     protected static int playerSubmittedCount = 0;
     private static int globalTurn = 1;

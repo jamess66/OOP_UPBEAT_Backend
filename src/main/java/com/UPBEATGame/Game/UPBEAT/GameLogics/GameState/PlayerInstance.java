@@ -1,5 +1,6 @@
-package com.UPBEATGame.Game.UPBEAT.GameLogics.Player;
+package com.UPBEATGame.Game.UPBEAT.GameLogics.GameState;
 
+import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.Player;
 import com.UPBEATGame.Game.UPBEAT.GameLogics.Region.Region;
 
 import java.util.Map;

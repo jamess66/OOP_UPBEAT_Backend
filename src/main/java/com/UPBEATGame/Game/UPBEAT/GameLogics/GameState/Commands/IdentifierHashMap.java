@@ -1,4 +1,4 @@
-package com.UPBEATGame.Game.UPBEAT.GameLogics.Engine.Commands;
+package com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.Commands;
 
 import lombok.Getter;
 

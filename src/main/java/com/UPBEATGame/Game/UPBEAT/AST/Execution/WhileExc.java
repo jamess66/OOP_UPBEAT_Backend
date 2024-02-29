@@ -1,7 +1,7 @@
-package com.UPBEATGame.Game.UPBEAT.AST.Statement;
+package com.UPBEATGame.Game.UPBEAT.AST.Execution;
 
 import com.UPBEATGame.Game.UPBEAT.AST.Expression.NumberExp;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.PlayerInstance;
+import com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.PlayerInstance;
 
 import java.util.ArrayList;
 import static com.UPBEATGame.Game.UPBEAT.AST.Node.*;
