@@ -3,7 +3,7 @@ package com.UPBEATGame.Game.UPBEAT.AST.Expression;
 import com.UPBEATGame.Game.UPBEAT.AST.Node.*;
 import com.UPBEATGame.Game.UPBEAT.AST.ASTErrorException;
 import com.UPBEATGame.Game.UPBEAT.Config.ConfigLoader;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.PlayerInstance;
+import com.UPBEATGame.Game.UPBEAT.GameData.Game.PlayerInstance;
 
 import java.util.Random;
 

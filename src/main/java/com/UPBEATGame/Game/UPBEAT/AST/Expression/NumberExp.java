@@ -1,7 +1,7 @@
 package com.UPBEATGame.Game.UPBEAT.AST.Expression;
 
 import com.UPBEATGame.Game.UPBEAT.AST.Node.Expr;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.PlayerInstance;
+import com.UPBEATGame.Game.UPBEAT.GameData.Game.PlayerInstance;
 
 public class NumberExp extends Expr {
     private final long value;

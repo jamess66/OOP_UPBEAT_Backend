@@ -1,12 +1,12 @@
-package com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.Commands;
+package com.UPBEATGame.Game.UPBEAT.GameData.Game.Commands;
 
 import com.UPBEATGame.Game.UPBEAT.Config.ConfigLoader;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.Player;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Region.HexRegion;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Region.Region;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Region.Territory;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Utility;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Utility.*;
+import com.UPBEATGame.Game.UPBEAT.GameData.Player.Player;
+import com.UPBEATGame.Game.UPBEAT.GameData.Region.HexRegion;
+import com.UPBEATGame.Game.UPBEAT.GameData.Region.Region;
+import com.UPBEATGame.Game.UPBEAT.GameData.Region.Territory;
+import com.UPBEATGame.Game.UPBEAT.GameData.Utility;
+import com.UPBEATGame.Game.UPBEAT.GameData.Utility.*;
 
 public class InformationExpression {
 

@@ -1,12 +1,8 @@
-package com.UPBEATGame.Game.UPBEAT.GameLogics.Region;
+package com.UPBEATGame.Game.UPBEAT.GameData.Region;
 
 import com.UPBEATGame.Game.UPBEAT.Config.ConfigLoader;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.Crew;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.Player;
+import com.UPBEATGame.Game.UPBEAT.GameData.Player.Player;
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.annotation.JsonTypeInfo.*;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.google.common.hash.HashCode;
 import lombok.Data;
 import lombok.Getter;
 
@@ -18,7 +14,7 @@ public class HexRegion implements Region{
     @JsonIgnore
     private Player owner;
 
-    private String regionColor = "FFFFFF";
+    private String regionColor = "#ffffff";
     //private long ownerHashcode;
     private long deposit;
     private final long max_deposit = ConfigLoader.getMax_dep();
@@ -56,7 +52,7 @@ public class HexRegion implements Region{
     }
 
     @JsonIgnore
-    public void updateDeposit(boolean instant, long amount){
+    public void updateDeposit(boolean instant, long amount){ // For test only
         this.deposit = Math.max(0, amount);
         this.deposit = Math.min(this.deposit, max_deposit);
     }
@@ -66,7 +62,7 @@ public class HexRegion implements Region{
     public void updateOwner(Player owner) {
         this.owner = owner;
         if(owner == null){
-            regionColor = "#FFFFFF";
+            regionColor = "#ffffff";
         }else regionColor = owner.getColor();
 
     }

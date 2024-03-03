@@ -1,7 +1,6 @@
-package com.UPBEATGame.Game.UPBEAT.GameLogics.Region;
+package com.UPBEATGame.Game.UPBEAT.GameData.Region;
 
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.Crew;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.Player;
+import com.UPBEATGame.Game.UPBEAT.GameData.Player.Player;
 import lombok.Getter;
 
 @Getter
@@ -50,6 +49,7 @@ public class HexGrid implements Territory{
             for (Region region : regions) {
                 if (player.equals(region.getOwner())) {
                     region.updateOwner(null);
+                    region.updateDeposit(true, 0);
                 }
             }
         }

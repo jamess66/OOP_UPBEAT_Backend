@@ -1,4 +1,4 @@
-package com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.Commands;
+package com.UPBEATGame.Game.UPBEAT.GameData.Game.Commands;
 
 import lombok.Getter;
 
@@ -11,7 +11,7 @@ public class IdentifierHashMap extends HashMap<String, Long> {
         if (containsKey(key)) {
             return super.get(key);
         } else {
-            return 0L;
+            return 0L; // if not initialize yet just return default value
         }
     }
 }

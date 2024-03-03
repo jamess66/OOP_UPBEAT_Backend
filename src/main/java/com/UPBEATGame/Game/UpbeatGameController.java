@@ -1,48 +1,37 @@
 package com.UPBEATGame.Game;
 
-import com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.GameDataInstance;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.GameUPBEAT;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.PlayerInstance;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Region.Territory;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Utility;
+import com.UPBEATGame.Game.UPBEAT.GameData.Game.GameState;
+import com.UPBEATGame.Game.UPBEAT.GameData.Game.GameInstance;
+import com.UPBEATGame.Game.UPBEAT.GameData.Game.PlayerInstance;
+import com.UPBEATGame.Game.UPBEAT.GameData.Region.Territory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @CrossOrigin
 @RestController
 public class UpbeatGameController {
 
-    private static final GameUPBEAT gameUPBEAT = GameDataInstance.getGameInstance();
-    private static int playerCount = 0;
-    protected static int playerSubmittedCount = 0;
-    private static int globalTurn = 1;
-    private static List<String> PlayerColorList = new ArrayList<>();
+    private static final GameInstance GAME_INSTANCE = GameState.getGameInstance();
+    protected static int currentPlayerSubmittedTurn = 0;
+    private static int globalTurn = 0;
 
-    static {
-        PlayerColorList.addAll(List.of(new String[]{"#FF6D6A", "#99d6ff", "#85e085", "#ff99dd", "#fbde6a", "#ff4d67", "#ffa07a"}));
-    }
 
     @PostMapping({"/player"})
     public PlayerObject createPlayer(@RequestBody String body) {
-        if(gameUPBEAT.getTerritory().isAllClaimed()) return null;
-        //if(gameUPBEAT.getPlayers().isEmpty()) globalTurn = 1;
-        int randomInt = (int) Math.abs(Utility.getRandomNumber() % PlayerColorList.size());
-        String randColor = PlayerColorList.get(randomInt);
-        PlayerColorList.remove(randomInt);
-        System.out.println(randColor);
-        PlayerObject playerObject = new PlayerObject(body, true, playerCount, randColor);
-        playerCount++;
+        if(GAME_INSTANCE.getTerritory().isAllClaimed()) return null; // cannot create anymore
+        return new PlayerObject(body, true);
+    }
 
-        return playerObject;
+    @DeleteMapping("/player/{name}")
+    public boolean removePlayer(@PathVariable String name) {
+        return GAME_INSTANCE.removePlayerInstance(name);
     }
 
     @GetMapping("/player/{name}")
     public PlayerObject getPlayer(@PathVariable String name){
-        System.out.println(name);
-        return new PlayerObject(name, false, gameUPBEAT.getPlayerInstance(name).getPlayerTurn(), gameUPBEAT.getPlayerInstance(name).getPlayer().getColor());
+        return new PlayerObject(name, false);
     }
 
     @GetMapping("/globalTerns")
@@ -50,44 +39,41 @@ public class UpbeatGameController {
         return globalTurn;
     }
 
-    @PutMapping("/constructionPlan/{name}/{constructionPlan}")
-    public Boolean submitConstructionPlan(@PathVariable String name, @PathVariable String constructionPlan){
+    @PutMapping("/constructionPlan/{name}")
+    public String submitConstructionPlan(@PathVariable String name, @RequestBody String constructionPlan){
         try {
-            if(gameUPBEAT.getPlayerInstance(name).getPlayerTurn() != playerSubmittedCount) return false;
-            gameUPBEAT.getPlayerInstance(name).newConstructionPlan(constructionPlan);
-            gameUPBEAT.getPlayerInstance(name).actionExecute();
-            playerSubmittedCount = (playerSubmittedCount + 1) % gameUPBEAT.getPlayers().size();
-            if(playerSubmittedCount == 0) globalTurn++;
-            for (PlayerInstance playerInstance :gameUPBEAT.getPlayers()){
-                if(playerInstance.getCityCenter() == null){
-                    gameUPBEAT.getTerritory().removeLosePlayerRegion(playerInstance.getPlayer());
-                    gameUPBEAT.getPlayersMap().remove(playerInstance.getPlayerName());
-                }
-            }
-
-            if(gameUPBEAT.getPlayers().isEmpty()){
-                playerCount = 0;
-                playerSubmittedCount = 0;
-                globalTurn = 1;
+            if(GAME_INSTANCE.getPlayerInstance(name).getPlayerTurn() != currentPlayerSubmittedTurn) return "Not your turn yet!!"; // not player turn
+            GAME_INSTANCE.getPlayerInstance(name).setConstructionPlan(constructionPlan);
+            GAME_INSTANCE.getPlayerInstance(name).actionExecute();
+            turnCalculation();
+            if(GAME_INSTANCE.getPlayers().isEmpty()){
+                currentPlayerSubmittedTurn = 0;
+                globalTurn = 0;
             }
 
         }catch (Exception e){
-            return false; // construction plan is not correct syntax or player not found.
+            return "Error: " + e.getMessage();
         }
-        return true; // construction plan is correct syntax.
+        return "Finished!!"; // construction plan is correct syntax.
+    }
+
+    private void turnCalculation(){
+        if(GAME_INSTANCE.checkAnyLosePlayer()) return;
+        currentPlayerSubmittedTurn = (currentPlayerSubmittedTurn + 1) % GAME_INSTANCE.getPlayers().size();
+        if(currentPlayerSubmittedTurn == 0) globalTurn++;
     }
 
     @GetMapping({"/territory"})
     public Territory getTerritory() {
-        return gameUPBEAT.getTerritory();
+        return GAME_INSTANCE.getTerritory();
     }
 
     @GetMapping({"/players"})
     public List<PlayerObject> getAllPlayer(){
-        List<PlayerInstance> playerInstances = gameUPBEAT.getPlayers();
+        List<PlayerInstance> playerInstances = GAME_INSTANCE.getPlayers();
         List<PlayerObject> playerObjects = new ArrayList<>();
         for (PlayerInstance playerInstance: playerInstances){
-            PlayerObject playerObject = new PlayerObject(playerInstance.getPlayerName(), false, playerInstance.getPlayerTurn(), playerInstance.getPlayer().getColor());
+            PlayerObject playerObject = new PlayerObject(playerInstance.getPlayerName(), false);
             playerObject.setIsPlayerTurn();
             playerObjects.add(playerObject);
         }

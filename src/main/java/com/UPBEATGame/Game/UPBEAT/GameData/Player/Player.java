@@ -1,9 +1,8 @@
-package com.UPBEATGame.Game.UPBEAT.GameLogics.Player;
+package com.UPBEATGame.Game.UPBEAT.GameData.Player;
 
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Region.Region;
+import com.UPBEATGame.Game.UPBEAT.GameData.Region.Region;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
-import java.util.Map;
 @JsonRootName(value = "info")
 public interface Player {
     long getBudget();
