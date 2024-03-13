@@ -15,7 +15,6 @@ public class HexRegion implements Region{
     private Player owner;
 
     private String regionColor = "#ffffff";
-    //private long ownerHashcode;
     private long deposit;
     private final long max_deposit = ConfigLoader.getMax_dep();
     private  int x, y;
@@ -63,7 +62,7 @@ public class HexRegion implements Region{
         this.owner = owner;
         if(owner == null){
             regionColor = "#ffffff";
-        }else regionColor = owner.getColor();
+        }else regionColor = owner.getPlayerColor();
 
     }
 

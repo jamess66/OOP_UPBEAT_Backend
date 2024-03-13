@@ -24,6 +24,6 @@ public class WhileExc extends Exec {
             executionRemain--;
         }
         if(next != null) return next.execute(command);
-        else return false;
+        else return true;
     }
 }

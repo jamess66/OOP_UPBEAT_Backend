@@ -14,6 +14,19 @@ public class GameTest {
 
     PlayerInstance player1 = gameInstance.createPlayerInstance("jeff", 5,5);
 
+    PlayerInstance player2 = gameInstance.createPlayerInstance("james", 6,5);
+
+    @Test
+    public void testShoot(){
+        System.out.println(player1.getPlayer().getCityCenter().getRegionX());
+
+
+//        player1.setConstructionPlan("x = x + 1 ");
+//        player1.actionExecute();
+
+//        System.out.println(player1.getPlayer().getCityCenter());
+    }
+
     @Test
     public void testGetGameInstance(){
         assertEquals(gameInstance, GameState.getGameInstance());

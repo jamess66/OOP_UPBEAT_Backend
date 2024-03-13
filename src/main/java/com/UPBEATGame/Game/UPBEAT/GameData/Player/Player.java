@@ -12,6 +12,6 @@ public interface Player {
     void updateCurrentRegion(Region region);
     Region getCityCenter();
     Region getCurrentRegion();
-    String getColor();
+    String getPlayerColor();
 
 }

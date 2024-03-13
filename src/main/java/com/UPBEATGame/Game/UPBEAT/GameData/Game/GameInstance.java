@@ -15,4 +15,5 @@ public interface GameInstance {
     List<PlayerInstance> getPlayers();
     Map<String, PlayerInstance> getPlayersMap();
     boolean checkAnyLosePlayer();
+    void checkIsAnyoneLoseCityCenter();
 }

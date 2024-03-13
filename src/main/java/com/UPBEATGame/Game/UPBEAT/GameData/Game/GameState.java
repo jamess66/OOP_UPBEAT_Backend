@@ -3,6 +3,7 @@ package com.UPBEATGame.Game.UPBEAT.GameData.Game;
 import com.UPBEATGame.Game.UPBEAT.Config.ConfigLoader;
 import com.UPBEATGame.Game.UPBEAT.GameData.Player.Crew;
 import com.UPBEATGame.Game.UPBEAT.GameData.Region.HexGrid;
+import com.UPBEATGame.Game.UPBEAT.GameData.Region.Region;
 import com.UPBEATGame.Game.UPBEAT.GameData.Region.Territory;
 import com.UPBEATGame.Game.UPBEAT.GameData.Utility;
 import lombok.Getter;
@@ -22,7 +23,10 @@ public class GameState implements GameInstance {
     private static int totalPlayer = 0;
 
     static {
-        PlayerColorList.addAll(List.of(new String[]{"#FF6D6A", "#99d6ff", "#85e085", "#ff99dd", "#fbde6a", "#ff4d67", "#ffa07a"}));
+        PlayerColorList.addAll(List.of(
+                "#FF6D6A", "#99d6ff", "#85e085", "#ff99dd", "#fbde6a", "#f2a3af", "#ffa07a", "#914d4d", "#8e6d50",
+                "#878e50", "#508f5b", "#50828f", "#50538f", "#71508f", "#8f507f", "#443334", "#4c4c4a", "#cecece"
+        ));
     }
 
     private GameState() {
@@ -56,7 +60,8 @@ public class GameState implements GameInstance {
             }
         }
         territory.removeLosePlayerRegion(playerToRemove.getPlayer());
-        PlayerColorList.add(playerToRemove.getPlayer().getColor()); // add player color back to reuse
+        PlayerColorList.add(playerToRemove.getPlayer().getPlayerColor()); // add player color back to reuse
+        totalPlayer = totalPlayer - 1;
         return true;
     }
 
@@ -98,11 +103,11 @@ public class GameState implements GameInstance {
         return isAnyLosePlayer;
     }
 
-    @Override
-    public boolean isGameOver(){
-        if(players.size() == 1) return true;
-        return false;
-    }
+//    @Override
+//    public boolean isGameOver(){
+//        if(players.size() == 1) return true;
+//        return false;
+//    }
 
     private String randomPlayerColor() {
         int randIndex = (int) Math.abs(Utility.getRandomNumber() % PlayerColorList.size());
@@ -114,5 +119,14 @@ public class GameState implements GameInstance {
 
     private int setPlayerTurn(){
         return totalPlayer;
+    }
+
+    public void checkIsAnyoneLoseCityCenter(){
+
+        for (PlayerInstance player : players.values()){
+            if(player.getCityCenter().getOwner() == null){
+                player.getPlayer().updateCityCenter(null);
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.UPBEATGame.Game.UPBEAT.GameData.Game;
 
 import com.UPBEATGame.Game.UPBEAT.AST.Node.Exec;
+import com.UPBEATGame.Game.UPBEAT.Config.ConfigLoader;
 import com.UPBEATGame.Game.UPBEAT.ConstructionParser.ConsParser;
 import com.UPBEATGame.Game.UPBEAT.ConstructionParser.Parser;
 import com.UPBEATGame.Game.UPBEAT.ConstructionParser.Tokenizer.ConsTokenizer;
@@ -24,10 +25,14 @@ public class CrewState implements PlayerInstance {
     private int turn;
     private final Territory territory;
     private String constructionPlan;
+    private long reserveTime;
+    private long planTime;
     private List<Exec> parsedExec;
     private final Map<String, Long> boundVar;
 
     public CrewState(String playerName , Player player, Territory territory, int turn){
+        this.reserveTime = (ConfigLoader.getPlan_rev_sec() * 1000) + (ConfigLoader.getPlan_rev_min() * 60000);
+        this.planTime = (ConfigLoader.getInit_plan_sec() * 1000) + (ConfigLoader.getInit_plan_min() * 60000);
         this.playerName = playerName;
         this.player = player;
         this.territory = territory;
@@ -48,6 +53,7 @@ public class CrewState implements PlayerInstance {
                 isExecutable = exec.execute(this);
             }
         }
+
     }
 
     @Override
@@ -170,4 +176,23 @@ public class CrewState implements PlayerInstance {
         return boundVar;
     }
 
+    @Override
+    public void setReserveTime(long time){
+        reserveTime = time;
+    }
+
+    @Override
+    public long getReserveTime(){
+        return reserveTime;
+    }
+
+    @Override
+    public void setPlanTime(long time){
+        planTime = time;
+    }
+
+    @Override
+    public long getPlanTime(){
+       return planTime;
+    }
 }

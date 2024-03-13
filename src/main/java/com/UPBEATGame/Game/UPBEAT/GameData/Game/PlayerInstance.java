@@ -34,4 +34,8 @@ public interface PlayerInstance {
     void actionExecute();
     int getPlayerTurn();
     void setPlayerTurn(int turn);
+    void setReserveTime(long time);
+    void setPlanTime(long time);
+    long getReserveTime();
+    long getPlanTime();
 }
