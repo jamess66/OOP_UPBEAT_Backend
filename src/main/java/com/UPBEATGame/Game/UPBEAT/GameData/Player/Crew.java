@@ -1,9 +1,9 @@
-package com.UPBEATGame.Game.UPBEAT.GameLogics.Player;
+package com.UPBEATGame.Game.UPBEAT.GameData.Player;
 
 import com.UPBEATGame.Game.UPBEAT.Config.ConfigLoader;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Region.Region;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Region.Territory;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Utility;
+import com.UPBEATGame.Game.UPBEAT.GameData.Region.Region;
+import com.UPBEATGame.Game.UPBEAT.GameData.Region.Territory;
+import com.UPBEATGame.Game.UPBEAT.GameData.Utility;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -17,19 +17,19 @@ public class Crew implements Player{
     private long budget;
     private Region cityCenter;
     private Region currentRegion;
-    private String color;
+    private String playerColor;
 
-    public Crew(Territory territory, String color) {
+    public Crew(Territory territory, String playerColor) {
         this.budget = ConfigLoader.getInit_budget();
-        this.color = color;
+        this.playerColor = playerColor;
         randomSpawn(territory);
     }
 
     @JsonCreator
-    public Crew(Territory territory, int x, int y, String color){ // fixed spawn point **for testing only**
+    public Crew(Territory territory, int x, int y, String playerColor){ // fixed spawn point **for testing only**
         this.budget = ConfigLoader.getInit_budget();
         Region region = territory.getRegion(x,y);
-        this.color = color;
+        this.playerColor = playerColor;
         this.currentRegion = region;
         this.cityCenter = region;
         this.cityCenter.updateDeposit(true , ConfigLoader.init_center_dep);

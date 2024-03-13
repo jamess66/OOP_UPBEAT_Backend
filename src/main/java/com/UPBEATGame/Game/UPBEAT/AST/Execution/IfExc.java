@@ -1,7 +1,7 @@
 package com.UPBEATGame.Game.UPBEAT.AST.Execution;
 
 import com.UPBEATGame.Game.UPBEAT.AST.Node.*;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.PlayerInstance;
+import com.UPBEATGame.Game.UPBEAT.GameData.Game.PlayerInstance;
 
 public class IfExc extends Exec {
     protected final Expr condition;

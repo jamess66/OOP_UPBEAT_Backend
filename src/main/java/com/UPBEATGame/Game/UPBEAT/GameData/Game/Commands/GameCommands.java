@@ -1,14 +1,15 @@
-package com.UPBEATGame.Game.UPBEAT.GameLogics.GameState;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.Player;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Region.Region;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Region.Territory;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Utility;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Utility.Direction;
+package com.UPBEATGame.Game.UPBEAT.GameData.Game.Commands;
+import com.UPBEATGame.Game.UPBEAT.GameData.Player.Player;
+import com.UPBEATGame.Game.UPBEAT.GameData.Region.HexRegion;
+import com.UPBEATGame.Game.UPBEAT.GameData.Region.Region;
+import com.UPBEATGame.Game.UPBEAT.GameData.Region.Territory;
+import com.UPBEATGame.Game.UPBEAT.GameData.Utility;
+import com.UPBEATGame.Game.UPBEAT.GameData.Utility.Direction;
 
 import java.util.List;
 
-import static com.UPBEATGame.Game.UPBEAT.GameLogics.Utility.getRegionInDirection;
-import static com.UPBEATGame.Game.UPBEAT.GameLogics.Utility.isPlayerOwner;
+import static com.UPBEATGame.Game.UPBEAT.GameData.Utility.getRegionInDirection;
+import static com.UPBEATGame.Game.UPBEAT.GameData.Utility.isPlayerOwner;
 
 
 public class GameCommands {
@@ -71,7 +72,7 @@ public class GameCommands {
     public static boolean collect(Player player, long collect){
         Region currentRegion = player.getCurrentRegion();
 
-        if(player.getBudget() >= 1){
+        if(collect >= 1){
             if(isPlayerOwner(player,currentRegion)){
                 if(currentRegion.getDeposit() >= collect){
                     currentRegion.updateDeposit(-1 * collect);
@@ -79,6 +80,7 @@ public class GameCommands {
                 }
                 if(currentRegion.getDeposit() <= 0){
                     currentRegion.updateOwner(null);
+
                 }
                 if(player.getCityCenter().getDeposit() < 1){
                     player.updateCityCenter(null);
@@ -96,12 +98,11 @@ public class GameCommands {
         if(player.getBudget() >= cost){
             if(attackingRegion.getOwner() != null && isPlayerOwner(player, player.getCurrentRegion())){
                 attackingRegion.updateDeposit(-1 * expenditure);
+
                 if(attackingRegion.getDeposit() < 1){
                     attackingRegion.updateOwner(null);
                 }
-                if(player.getCityCenter().getDeposit() < 1){
-                    player.updateCityCenter(null);
-                }
+
             }
             player.payCost(cost);
         }

@@ -1,6 +1,6 @@
-package com.UPBEATGame.Game.UPBEAT.GameLogics.Region;
+package com.UPBEATGame.Game.UPBEAT.GameData.Region;
 
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.*;
+import com.UPBEATGame.Game.UPBEAT.GameData.Player.*;
 
 public interface Region {
     Player getOwner();

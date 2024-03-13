@@ -1,12 +1,12 @@
-package com.UPBEATGame.Game.UPBEAT.GameLogics.GameState;
+package com.UPBEATGame.Game.UPBEAT.GameData.Game;
 
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.Player;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Region.Region;
+import com.UPBEATGame.Game.UPBEAT.GameData.Player.Player;
+import com.UPBEATGame.Game.UPBEAT.GameData.Region.Region;
 
 import java.util.Map;
 
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Region.Territory;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Utility.Direction;
+import com.UPBEATGame.Game.UPBEAT.GameData.Region.Territory;
+import com.UPBEATGame.Game.UPBEAT.GameData.Utility.Direction;
 
 public interface PlayerInstance {
     Player getPlayer();
@@ -29,8 +29,13 @@ public interface PlayerInstance {
     long getCityCenterCol();
     long getRandomVal();
     Map<String, Long> getIdentifiers();
-    void newConstructionPlan(String string);
-    void newConstructionPlan();
+    void setConstructionPlan(String string);
+
     void actionExecute();
     int getPlayerTurn();
+    void setPlayerTurn(int turn);
+    void setReserveTime(long time);
+    void setPlanTime(long time);
+    long getReserveTime();
+    long getPlanTime();
 }

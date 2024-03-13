@@ -1,7 +1,7 @@
 package com.UPBEATGame.Game.UPBEAT.AST.Execution;
 
 import com.UPBEATGame.Game.UPBEAT.AST.Expression.NumberExp;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.PlayerInstance;
+import com.UPBEATGame.Game.UPBEAT.GameData.Game.PlayerInstance;
 
 import java.util.ArrayList;
 import static com.UPBEATGame.Game.UPBEAT.AST.Node.*;
@@ -24,6 +24,6 @@ public class WhileExc extends Exec {
             executionRemain--;
         }
         if(next != null) return next.execute(command);
-        else return false;
+        else return true;
     }
 }

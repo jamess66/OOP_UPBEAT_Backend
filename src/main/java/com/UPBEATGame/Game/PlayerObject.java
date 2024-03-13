@@ -1,48 +1,42 @@
 package com.UPBEATGame.Game;
 
-import com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.GameDataInstance;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.Player;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.PlayerInstance;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.UPBEATGame.Game.UPBEAT.GameData.Game.GameState;
+import com.UPBEATGame.Game.UPBEAT.GameData.Player.Player;
+import com.UPBEATGame.Game.UPBEAT.GameData.Game.PlayerInstance;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import lombok.Getter;
 
 import java.util.Map;
 
-import static com.UPBEATGame.Game.UpbeatGameController.playerSubmittedCount;
+import static com.UPBEATGame.Game.UpbeatGameController.currentPlayerSubmittedTurn;
 
 @Getter
 @JsonRootName(value = "crew")
 public class PlayerObject {
     private String playerName;
     private Map<String, Long> identifier;
-    private long playerHashCode;
     private Player crewInfo;
     private Boolean isPlayerTurn;
-    private String color;
-    @JsonIgnore
+    //@JsonIgnore
     private int playerTurn;
 
-    @JsonIgnore
-
-    public PlayerObject(String playerName, boolean createNew, int count, String color) {
+    public PlayerObject(String playerName, boolean createNew) {
         PlayerInstance playerInstance;
         if (createNew) {
-            playerInstance = GameDataInstance.getGameInstance().createPlayerInstance(playerName, count, color);
+            playerInstance = GameState.getGameInstance().createPlayerInstance(playerName);
         }else {
-            playerInstance = GameDataInstance.getGameInstance().getPlayerInstance(playerName);
+            playerInstance = GameState.getGameInstance().getPlayerInstance(playerName);
         }
+
         this.playerName = playerInstance.getPlayerName();
         identifier = playerInstance.getIdentifiers();
         crewInfo = playerInstance.getPlayer();
-        playerHashCode = crewInfo.hashCode();
         playerTurn = playerInstance.getPlayerTurn();
         setIsPlayerTurn();
-        this.color = color;
     }
 
     void setIsPlayerTurn(){
-        this.isPlayerTurn = playerSubmittedCount == playerTurn;
+        this.isPlayerTurn = currentPlayerSubmittedTurn == playerTurn;
     }
 
 }

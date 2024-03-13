@@ -1,6 +1,6 @@
-package com.UPBEATGame.Game.UPBEAT.GameLogics.Region;
+package com.UPBEATGame.Game.UPBEAT.GameData.Region;
 
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.Player;
+import com.UPBEATGame.Game.UPBEAT.GameData.Player.Player;
 
 public interface Territory {
     Region getRegion(int row, int col);

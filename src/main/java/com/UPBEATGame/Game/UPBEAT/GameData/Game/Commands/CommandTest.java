@@ -1,17 +1,17 @@
-package com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.Commands;
+package com.UPBEATGame.Game.UPBEAT.GameData.Game.Commands;
 
-import com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.GameDataInstance;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.PlayerInstance;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.Crew;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.Player;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Region.Region;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Region.Territory;
+import com.UPBEATGame.Game.UPBEAT.GameData.Game.GameState;
+import com.UPBEATGame.Game.UPBEAT.GameData.Game.PlayerInstance;
+import com.UPBEATGame.Game.UPBEAT.GameData.Player.Crew;
+import com.UPBEATGame.Game.UPBEAT.GameData.Player.Player;
+import com.UPBEATGame.Game.UPBEAT.GameData.Region.Region;
+import com.UPBEATGame.Game.UPBEAT.GameData.Region.Territory;
 
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Utility;
+import com.UPBEATGame.Game.UPBEAT.GameData.Utility;
 import org.junit.Test;
 
 import static com.UPBEATGame.Game.UPBEAT.Config.ConfigLoader.*;
-import static com.UPBEATGame.Game.UPBEAT.GameLogics.Utility.IntegerToDirection;
+import static com.UPBEATGame.Game.UPBEAT.GameData.Utility.IntegerToDirection;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -19,12 +19,12 @@ public class CommandTest {
 
 
 
-    Territory testWorld = GameDataInstance.getGameInstance().getTerritory();
+    Territory testWorld = GameState.getGameInstance().getTerritory();
 
-    PlayerInstance player1 = GameDataInstance.getGameInstance().createPlayerInstance("james", 5, 5, "55");
+    PlayerInstance player1 = GameState.getGameInstance().createPlayerInstance("james", 5, 5);
 
 
-    PlayerInstance player2 = GameDataInstance.getGameInstance().createPlayerInstance("james", 5, 5, "66");
+    PlayerInstance player2 = GameState.getGameInstance().createPlayerInstance("james", 5, 5);
 
     @Test
     public void testNearby(){

@@ -1,8 +1,7 @@
-package com.UPBEATGame.Game.UPBEAT.GameLogics.Region;
+package com.UPBEATGame.Game.UPBEAT.GameData.Region;
 
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.Crew;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.Player;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Utility;
+import com.UPBEATGame.Game.UPBEAT.GameData.Player.Crew;
+import com.UPBEATGame.Game.UPBEAT.GameData.Player.Player;
 import org.junit.Test;
 
 import static org.testng.AssertJUnit.*;

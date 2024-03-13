@@ -1,7 +1,7 @@
 package com.UPBEATGame.Game.UPBEAT.AST.Expression;
 
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Utility.Direction;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.PlayerInstance;
+import com.UPBEATGame.Game.UPBEAT.GameData.Utility.Direction;
+import com.UPBEATGame.Game.UPBEAT.GameData.Game.PlayerInstance;
 
 import static com.UPBEATGame.Game.UPBEAT.AST.Node.*;
 

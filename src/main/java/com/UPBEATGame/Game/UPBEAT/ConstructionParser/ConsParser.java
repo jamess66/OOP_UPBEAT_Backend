@@ -7,7 +7,7 @@ import com.UPBEATGame.Game.UPBEAT.AST.Expression.*;
 import com.UPBEATGame.Game.UPBEAT.AST.Execution.*;
 import com.UPBEATGame.Game.UPBEAT.AST.Node.*;
 import com.UPBEATGame.Game.UPBEAT.AST.ASTErrorException.*;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Utility.Direction;
+import com.UPBEATGame.Game.UPBEAT.GameData.Utility.Direction;
 import com.UPBEATGame.Game.UPBEAT.ConstructionParser.ParserException.*;
 import com.UPBEATGame.Game.UPBEAT.ConstructionParser.Tokenizer.ConsTokenizer;
 

@@ -1,0 +1,421 @@
+* commit 4efaae30c6d6ddafe2ea22f950db0e334374b5ed
+| Author: Thanawat James Jaisert <89368503+JameSs-66@users.noreply.github.com>
+| Date:   Sun Mar 3 20:36:15 2024 +0700
+| 
+|     fix bugs, refactor, clean up code
+|     
+|     -fix a little evaluator bugs
+|     -clean up the code part that does not use
+|     
+| *   commit 8f9c13f3eee3384a6ea4d5727468cc96813dd8ac
+| |\  Merge: 373ed44 d6ad0fb
+| |/  Author: Thanawat James Jaisert <89368503+JameSs-66@users.noreply.github.com>
+|/|   Date:   Thu Feb 29 16:37:11 2024 +0700
+| |   
+| |       Merge pull request #4 from JameSs-66/james-branch
+| |       
+| |       add more colors
+| | 
+* | commit d6ad0fba56f0952c3626971671ada23522f3d444
+| | Author: Thanawat James Jaisert <89368503+JameSs-66@users.noreply.github.com>
+| | Date:   Thu Feb 29 16:35:29 2024 +0700
+| | 
+| |     add more colors
+| |     
+| |     added 100 shade pastel color
+| |   
+| *   commit 373ed44ec5ee407de934381deabc51aef46ce347
+| |\  Merge: 1f7d60b 8c09e26
+| |/  Author: Thanawat James Jaisert <89368503+JameSs-66@users.noreply.github.com>
+|/|   Date:   Thu Feb 29 14:05:28 2024 +0700
+| |   
+| |       Merge pull request #3 from JameSs-66/james-branch
+| |       
+| |       refactors
+| | 
+* | commit 8c09e264036880878a77c4c94959c65588bcc3d2
+| | Author: Thanawat James Jaisert <89368503+JameSs-66@users.noreply.github.com>
+| | Date:   Thu Feb 29 14:04:42 2024 +0700
+| | 
+| |     refactors
+| |     
+| |     refactors some files/packages for easy to read
+| |   
+| *   commit 1f7d60b23b56e4e43879e151bbbcb1e6ec145b24
+| |\  Merge: a7c8cd4 cfcd578
+| |/  Author: Thanawat James Jaisert <89368503+JameSs-66@users.noreply.github.com>
+|/|   Date:   Thu Feb 29 00:11:00 2024 +0700
+| |   
+| |       Merge pull request #2 from JameSs-66/james-branch
+| |       
+| |       James branch
+| | 
+* | commit cfcd578c476281c4804d471235fc5c43902ad108
+| | Author: Thanawat James Jaisert <89368503+JameSs-66@users.noreply.github.com>
+| | Date:   Wed Feb 28 23:09:06 2024 +0700
+| | 
+| |     fix and add
+| |     
+| |     fixed the issue that the player spawn at other player own region
+| |     add more color to handle more player incoming
+| | 
+* | commit c731c2f019b1e084af3cc58a661d6ae4dbae2ce9
+| | Author: Thanawat James Jaisert <89368503+JameSs-66@users.noreply.github.com>
+| | Date:   Wed Feb 28 20:34:17 2024 +0700
+| | 
+| |     changes and add
+| |     
+| |     change send region color instead of player hash code for easy to display owner region
+| | 
+* | commit af3c34746d36a6556256df238b43e12c9e2a0a74
+| | Author: Thanawat James Jaisert <89368503+JameSs-66@users.noreply.github.com>
+| | Date:   Mon Feb 26 21:52:58 2024 +0700
+| | 
+| |     add turn rotation
+| |     
+| |     add turn rotation for players
+| | 
+* | commit 45d0a288368e0028e70e515b39ff0d6c8585d613
+| | Author: Thanawat James Jaisert <89368503+JameSs-66@users.noreply.github.com>
+| | Date:   Sun Feb 25 14:34:24 2024 +0700
+| | 
+| |     Changes back-end controller
+| |     
+| |     - send player hashcode instead of player object as player_id
+| | 
+* | commit 2f117cf1ff78e81ba34ded189ed86fe69ed7874a
+| | Author: Thanawat James Jaisert <89368503+JameSs-66@users.noreply.github.com>
+| | Date:   Fri Feb 23 12:37:16 2024 +0700
+| | 
+| |     change build system and add REST API
+| |     
+| |     - change build system to Maven
+| |     - add controller and annotations to classes
+| | 
+* | commit ce5e8e71e3f62242a85a5e48c37389f85197ce3e
+| | Author: Thanawat James Jaisert <89368503+JameSs-66@users.noreply.github.com>
+| | Date:   Thu Feb 22 22:59:02 2024 +0700
+| | 
+| |     add and fix classes
+| |     
+| |     - implement GameState class and GameUPBEAT interface
+| |     - fix WhileExec bugs
+| |     - remove sout form parser, exec, and expr
+| |     - test evaluate and execute to works with game state
+| |     -
+| | 
+* | commit 8d821f8c3e498262dbcc5e5699b585ff2ba9d490
+| | Author: Thanawat James Jaisert <89368503+JameSs-66@users.noreply.github.com>
+| | Date:   Sun Feb 18 01:11:28 2024 +0700
+| | 
+| |     Finished Game Commands
+| |     
+| |     - implement GameCommands class methods (relocate, move, invest, collect, shoot)
+| |     - implement ImformationExpression class methods (nearby, opponent)
+| |     - tested GameCommands class methods
+| |     - tested ImformationExpression class methods
+| |     - add/change some methods on model classes
+| | 
+* | commit d092c880d451438267975eeb74cff7190a3e0972
+| | Author: Thanawat James Jaisert <89368503+JameSs-66@users.noreply.github.com>
+| | Date:   Sun Feb 11 16:31:56 2024 +0700
+| | 
+| |     Finished Parser and Evaluator
+| |     
+| |     - implement tokenizer
+| |     - implement parser
+| |     - implement AST
+| |     - tested tokenizer
+| |     - tested parser
+| |     - untest evaluator but toString works correctly
+| | 
+* | commit 70eb81b17232bc972b6ec677b72b2c7a5208a1a8
+| | Author: Thanawat James Jaisert <89368503+JameSs-66@users.noreply.github.com>
+| | Date:   Tue Feb 6 02:01:53 2024 +0700
+| | 
+| |     implement ActionCommand and InformationExpression
+| |     
+| |     implement nearby, opponent
+| |     implement relocate, move, invest, collect
+| | 
+* | commit 12ff79314e7550a6098fee2b9df32312a2a0ac8d
+| | Author: Thanawat James Jaisert <89368503+JameSs-66@users.noreply.github.com>
+| | Date:   Mon Feb 5 01:48:13 2024 +0700
+| | 
+| |     implement and redesign some classes
+| |     
+| |     - remove PathFinder (no needed)
+| |     - move Player, Region, Terriory, WorldGrid to HexWorld package
+| |     - move ConfidLoader to Config package and fix some issue
+| |     - implement ActionComand, Direction and InformationExpression
+| | 
+* | commit 7d0bb20cd7e3262340b2fb5966a9bb23a67a4ef7
+| | Author: Thanawat James Jaisert <89368503+JameSs-66@users.noreply.github.com>
+| | Date:   Sun Feb 4 02:41:16 2024 +0700
+| | 
+| |     fix, modifies, and implements classes
+| |     
+| |     -fixed PathFinder issue that return the shortest path not correctly
+| |     -implement new Player class to handle with classes
+| |     -changes WorldMap to Terriory interface and WorldGrid class to maintain esier in the future
+| |     -changes and add Region class methods to work with other classes
+| | 
+* | commit 5c34d88103ecb8051df5b4dda2217532a881ac91
+| | Author: Thanawat James Jaisert <89368503+JameSs-66@users.noreply.github.com>
+| | Date:   Sat Feb 3 19:22:13 2024 +0700
+| | 
+| |     implement PathFinder
+| |     
+| |     implement PathFinder using A* algorithm
+| | 
+* | commit 0c8b66ff3cd116b93bdff6e06e835369302e6e66
+| | Author: Thanawat James Jaisert <89368503+JameSs-66@users.noreply.github.com>
+| | Date:   Fri Feb 2 20:42:12 2024 +0700
+| | 
+| |     implement ConfigLoader
+| |     
+| |     implement ConfigLoader for getting config value form configuration file
+| | 
+* | commit 35b2aaa58e4440f152e40b8f397a6767c14997a7
+| | Author: Thanawat James Jaisert <89368503+JameSs-66@users.noreply.github.com>
+| | Date:   Fri Feb 2 17:26:52 2024 +0700
+| | 
+| |     implement classes
+| |     
+| |     implement WorldMap class
+| |     implement Region class
+| |     implement Player class
+| | 
+* | commit 4082b77ad9fec890962a80b599c39ce2714cc4aa
+| | Author: Thanawat James Jaisert <89368503+JameSs-66@users.noreply.github.com>
+| | Date:   Wed Jan 24 02:23:52 2024 +0700
+| | 
+| |     first commit
+| | 
+| * commit a7c8cd415178794bb06f91aa712b0912d212d0b7
+| | Author: Thanawat James Jaisert <89368503+JameSs-66@users.noreply.github.com>
+| | Date:   Thu Feb 29 00:02:48 2024 +0700
+| | 
+| |     Update README.md
+| | 
+| * commit 5de7a57f1e3e6bc207e105917e41e2395b23f435
+|/  Author: Thanawat James Jaisert <89368503+JameSs-66@users.noreply.github.com>
+|   Date:   Thu Feb 29 00:01:43 2024 +0700
+|   
+|       add link to front end repository.
+|   
+| * commit 71ff10a304f8da1bca224e2ebfda98e55561abf2
+| | Author: tteenntt <87744652+Unlxii@users.noreply.github.com>
+| | Date:   Wed Feb 28 23:50:36 2024 +0700
+| | 
+| |     unbeliveable
+| | 
+| * commit 1d2df96f4dc38d2aabe847e29d1363071d49212d
+| | Author: tteenntt <87744652+Unlxii@users.noreply.github.com>
+| | Date:   Wed Feb 28 23:19:01 2024 +0700
+| | 
+| |     up
+| | 
+| * commit 795c55a086f1fdbb34a8e39b8600a1635edfa502
+| | Author: tteenntt <87744652+Unlxii@users.noreply.github.com>
+| | Date:   Wed Feb 28 20:34:17 2024 +0700
+| | 
+| |     fix write command
+| |     
+| |     ให้มันใหญ่ขึ้น
+| | 
+| * commit c388107ee00a987a6a2f45558c3f8daae17ccc26
+| | Author: tteenntt <87744652+Unlxii@users.noreply.github.com>
+| | Date:   Wed Feb 28 02:03:11 2024 +0700
+| | 
+| |     added interface
+| |     
+| |     added interface get HexGrid please
+| |     check and also check that all received values are used. And if you want to edit Front-end code to match what the back-end needs. Please contact.
+| | 
+| * commit 5eadfdbc544955a1a555c7b0a494d00c8f952af3
+| | Author: tteenntt <87744652+Unlxii@users.noreply.github.com>
+| | Date:   Mon Feb 26 18:46:21 2024 +0700
+| | 
+| |     change hexagon split component
+| | 
+| * commit 69a2108bbc8ddb839f6e022e2d6d991980fecdd7
+| | Author: tteenntt <87744652+Unlxii@users.noreply.github.com>
+| | Date:   Sun Feb 25 17:17:29 2024 +0700
+| | 
+| |     api chicken
+| | 
+| * commit 74d1636cc9de79cd4ee2eb7c982ead5a534fde15
+| | Author: tteenntt <87744652+Unlxii@users.noreply.github.com>
+| | Date:   Sun Feb 25 15:05:24 2024 +0700
+| | 
+| |     test test
+| | 
+| * commit 3e99c62eeebdd029d1f63a1eda6d51e5a2d019cd
+| | Author: tteenntt <87744652+Unlxii@users.noreply.github.com>
+| | Date:   Sun Feb 25 13:02:23 2024 +0700
+| | 
+| |     finish gamestate ui
+| |     
+| |     waiting connect api
+| |     building config game
+| | 
+| * commit 05c680b4786fd5e51d10b3b85f7db96d5eacc781
+| | Author: tteenntt <87744652+Unlxii@users.noreply.github.com>
+| | Date:   Wed Feb 21 00:33:39 2024 +0700
+| | 
+| |     hehe
+| | 
+| * commit eb6a04f1c30470788ff6f5dad38fb014375d0c24
+| | Author: tteenntt <87744652+Unlxii@users.noreply.github.com>
+| | Date:   Wed Feb 21 00:24:12 2024 +0700
+| | 
+| |     build command prompt
+| | 
+| * commit 74703209bfd3f18a069596021ce96510f499533b
+| | Author: tteenntt <87744652+Unlxii@users.noreply.github.com>
+| | Date:   Tue Feb 20 23:49:00 2024 +0700
+| | 
+| |     a litle bit fix
+| | 
+| * commit 7f750904e84cbbcd78fc758d026f2fac587cf6d8
+| | Author: tteenntt <87744652+Unlxii@users.noreply.github.com>
+| | Date:   Tue Feb 20 14:36:13 2024 +0700
+| | 
+| |     Delete favicon.ico
+| | 
+| * commit cdbeb56f25a9fb6795cdb74f774cf10f9bfbef23
+| | Author: tteenntt <87744652+Unlxii@users.noreply.github.com>
+| | Date:   Tue Feb 20 14:34:52 2024 +0700
+| | 
+| |     change router and link page
+| | 
+| * commit 61c95f2349fa39b9039279006b7dd025c1a57ddf
+| | Author: tteenntt <87744652+Unlxii@users.noreply.github.com>
+| | Date:   Sun Feb 18 16:29:26 2024 +0700
+| | 
+| |     added write props
+| | 
+| * commit 08a98ac0b2b4f6b19a403ffcf94de999fc6c5d6c
+| | Author: tteenntt <87744652+Unlxii@users.noreply.github.com>
+| | Date:   Tue Feb 13 01:15:35 2024 +0700
+| | 
+| |     add time round
+| |     
+| |     problem background not full
+| | 
+| * commit 602ffe7989f0c53061b3a6af0f5432cfa85d691f
+| | Author: tteenntt <87744652+Unlxii@users.noreply.github.com>
+| | Date:   Tue Feb 13 00:33:37 2024 +0700
+| | 
+| |     fix display
+| | 
+| * commit ce2ed158576ca065888d22309fa1ae7358327e18
+| | Author: tteenntt <87744652+Unlxii@users.noreply.github.com>
+| | Date:   Mon Feb 12 15:53:30 2024 +0700
+| | 
+| |     update
+| |     
+| |     add task send code
+| |     (just typing no effect)
+| |     add back ground
+| |     fix hexagon
+| | 
+| * commit 0c71c6d6e65ce857d3203db5063f79f19f7f321f
+| | Author: tteenntt <87744652+Unlxii@users.noreply.github.com>
+| | Date:   Tue Feb 6 23:28:17 2024 +0700
+| | 
+| |     map hexagon-grid-vite+react
+| | 
+| * commit 5f5eec87420fbedd23b4e2257ec209d184c8eb46
+| | Author: tteenntt <87744652+Unlxii@users.noreply.github.com>
+| | Date:   Tue Feb 6 22:15:51 2024 +0700
+| | 
+| |     delete frontend old files
+| | 
+| * commit 18af7a9ec376acd2e0912019069211fea226b807
+| | Author: tteenntt <87744652+Unlxii@users.noreply.github.com>
+| | Date:   Sat Feb 3 14:26:37 2024 +0700
+| | 
+| |     delete image in src index
+| | 
+| * commit 04dd7c51c57186779da121c8b3a55c793a419f22
+|/  Author: tteenntt <87744652+Unlxii@users.noreply.github.com>
+|   Date:   Wed Jan 31 14:46:31 2024 +0700
+|   
+|       added prototpye hexagongrid
+|       
+|       added prototype but can't fix column and rows when want to put to rows and column only can change hight and width
+|   
+| * commit 5e7e2fe754f46e9aa3068d07c37f7923550c92c2
+| | Author: YotsawatSuki <110969388+YotsawatSuki@users.noreply.github.com>
+| | Date:   Wed Feb 7 02:33:07 2024 +0700
+| | 
+| |     modification on tokenizer (Maybe more edit later)
+| |     add interface of tokenizer and add more exception for tokenizer
+| | 
+| * commit 08023468b6bcff16f6030ad7c7eba0649a36a170
+| | Author: YotsawatSuki <110969388+YotsawatSuki@users.noreply.github.com>
+| | Date:   Tue Feb 6 01:16:39 2024 +0700
+| | 
+| |     little debug ConstructionPlanParser
+| | 
+| * commit abd16861ebbd8769520897097d8f849d3e14f20b
+| | Author: YotsawatSuki <110969388+YotsawatSuki@users.noreply.github.com>
+| | Date:   Tue Feb 6 01:04:33 2024 +0700
+| | 
+| |     1.add AST class for using with arithmetic and variable
+| |     2.more edit ConstructionPlanParser but still not finish ;-;
+| |     3.Have a little conflict in main class, so it will have some little bit dizzy things.
+| | 
+| * commit 99950ad39cd5cf3a38a29075722ea42a30dfb614
+| | Author: YotsawatSuki <110969388+YotsawatSuki@users.noreply.github.com>
+| | Date:   Mon Feb 5 15:49:01 2024 +0700
+| | 
+| |     Add crucial part of Project's parser.
+| |     Which still have some problem to fix, After identifier String, how do we need to do for make its as variable. Including special variables that need to do something for prevent its from assignment
+| | 
+| * commit 76127e8797597d22f1b6b791898c067b311e877c
+| | Author: YotsawatSuki <110969388+YotsawatSuki@users.noreply.github.com>
+| | Date:   Mon Feb 5 15:41:12 2024 +0700
+| | 
+| |     Edit and Change these items
+| |     1.Change name of exception class
+| |     2.add code for expression tokenizer
+| |     3.add alternative exp tokenizer that maybe beneficial use later
+| | 
+| * commit aacc6f0c6e7f395fb23f78c2365b72ed007bf535
+| | Author: YotsawatSuki <110969388+YotsawatSuki@users.noreply.github.com>
+| | Date:   Mon Feb 5 15:29:12 2024 +0700
+| | 
+| |     Add file manager for read input construction plan and write this after finish parser (perhaps edit this idea later)
+| | 
+| * commit 7167da272c24ce54f7eb33eb5700beba64b3060f
+| | Author: YotsawatSuki <110969388+YotsawatSuki@users.noreply.github.com>
+| | Date:   Mon Feb 5 15:24:15 2024 +0700
+| | 
+| |     add alternatively Construction Plan file with comment
+| | 
+| * commit 29e0264033bb1c862a8eafc5b437dff13ed2b35c
+| | Author: YotsawatSuki <110969388+YotsawatSuki@users.noreply.github.com>
+| | Date:   Mon Feb 5 15:23:32 2024 +0700
+| | 
+| |     rename for easily understand
+| | 
+| * commit 3b919c82455e59e2c97efb95cba7895294a9bcd0
+|/  Author: YotsawatSuki <110969388+YotsawatSuki@users.noreply.github.com>
+|   Date:   Mon Feb 5 13:09:16 2024 +0700
+|   
+|       add some work in parts of grammar parser
+| 
+* commit 6e328e65dc949d4c9302c8b8e81fc1a455a41910
+| Author: Thanawat James Jaisert <89368503+JameSs-66@users.noreply.github.com>
+| Date:   Wed Jan 24 02:20:40 2024 +0700
+| 
+|     Create README.md
+| 
+* commit fb76e3445d526f33c0f9f298ac068d71a005f60d
+  Author: Thanawat James Jaisert <89368503+JameSs-66@users.noreply.github.com>
+  Date:   Wed Jan 24 02:19:14 2024 +0700
+  
+      first commit

@@ -1,34 +1,38 @@
-package com.UPBEATGame.Game.UPBEAT.GameLogics.GameState;
+package com.UPBEATGame.Game.UPBEAT.GameData.Game;
 
 import com.UPBEATGame.Game.UPBEAT.AST.Node.Exec;
+import com.UPBEATGame.Game.UPBEAT.Config.ConfigLoader;
 import com.UPBEATGame.Game.UPBEAT.ConstructionParser.ConsParser;
 import com.UPBEATGame.Game.UPBEAT.ConstructionParser.Parser;
 import com.UPBEATGame.Game.UPBEAT.ConstructionParser.Tokenizer.ConsTokenizer;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.Commands.IdentifierHashMap;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.Commands.InformationExpression;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Player.Player;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Region.Region;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Region.Territory;
-import com.UPBEATGame.Game.UPBEAT.GameLogics.Utility;
+import com.UPBEATGame.Game.UPBEAT.GameData.Game.Commands.GameCommands;
+import com.UPBEATGame.Game.UPBEAT.GameData.Game.Commands.IdentifierHashMap;
+import com.UPBEATGame.Game.UPBEAT.GameData.Game.Commands.InformationExpression;
+import com.UPBEATGame.Game.UPBEAT.GameData.Player.Player;
+import com.UPBEATGame.Game.UPBEAT.GameData.Region.Region;
+import com.UPBEATGame.Game.UPBEAT.GameData.Region.Territory;
+import com.UPBEATGame.Game.UPBEAT.GameData.Utility;
 import lombok.Data;
 import lombok.Getter;
 
-import java.io.IOException;
 import java.util.*;
-
-import static com.UPBEATGame.Game.UPBEAT.ConstructionParser.Tokenizer.ReadConstructionPlan.forTestingConstructionPlan;
 
 @Getter
 @Data
-public class CrewCommands implements PlayerInstance {
+public class CrewState implements PlayerInstance {
     private final String playerName;
     private final Player player;
-    private final int turn;
+    private int turn;
     private final Territory territory;
     private String constructionPlan;
+    private long reserveTime;
+    private long planTime;
     private List<Exec> parsedExec;
     private final Map<String, Long> boundVar;
-    public CrewCommands(String playerName , Player player, Territory territory, int turn){
+
+    public CrewState(String playerName , Player player, Territory territory, int turn){
+        this.reserveTime = (ConfigLoader.getPlan_rev_sec() * 1000) + (ConfigLoader.getPlan_rev_min() * 60000);
+        this.planTime = (ConfigLoader.getInit_plan_sec() * 1000) + (ConfigLoader.getInit_plan_min() * 60000);
         this.playerName = playerName;
         this.player = player;
         this.territory = territory;
@@ -49,19 +53,11 @@ public class CrewCommands implements PlayerInstance {
                 isExecutable = exec.execute(this);
             }
         }
+
     }
 
     @Override
-    public void newConstructionPlan(){
-        try {
-            constructionPlan = forTestingConstructionPlan();
-        } catch (IOException e) {
-            constructionPlan = "";
-        }
-    }
-
-    @Override
-    public void newConstructionPlan(String string){
+    public void setConstructionPlan(String string){
         if(!constructionPlan.equals(string)){
             System.out.println("changed");
             player.payCost(1);
@@ -171,8 +167,32 @@ public class CrewCommands implements PlayerInstance {
     }
 
     @Override
+    public void setPlayerTurn(int turn){
+       this.turn = turn;
+    }
+
+    @Override
     public Map<String, Long> getIdentifiers() {
         return boundVar;
     }
 
+    @Override
+    public void setReserveTime(long time){
+        reserveTime = time;
+    }
+
+    @Override
+    public long getReserveTime(){
+        return reserveTime;
+    }
+
+    @Override
+    public void setPlanTime(long time){
+        planTime = time;
+    }
+
+    @Override
+    public long getPlanTime(){
+       return planTime;
+    }
 }

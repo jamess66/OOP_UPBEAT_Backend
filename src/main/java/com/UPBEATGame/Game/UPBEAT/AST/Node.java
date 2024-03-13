@@ -1,6 +1,6 @@
 package com.UPBEATGame.Game.UPBEAT.AST;
 
-import com.UPBEATGame.Game.UPBEAT.GameLogics.GameState.PlayerInstance;
+import com.UPBEATGame.Game.UPBEAT.GameData.Game.PlayerInstance;
 import lombok.Getter;
 
 public abstract class Node {
