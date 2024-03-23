@@ -24,6 +24,7 @@ public class HexRegion implements Region{
         this.y = y;
         this.owner = null;
         this.deposit = 0;
+
     }
 
     public HexRegion(){

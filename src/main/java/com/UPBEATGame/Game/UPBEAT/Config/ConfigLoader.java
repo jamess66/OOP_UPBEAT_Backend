@@ -23,8 +23,9 @@ public class ConfigLoader {
             plan_rev_min,
             plan_rev_sec,
             rev_cost,
-            max_dep
-    ;
+            max_dep,
+            max_player
+                    ;
     @Getter
     public static final float interest_pct;
 
@@ -41,6 +42,7 @@ public class ConfigLoader {
         rev_cost = getLongProperties("rev_cost");
         max_dep = getLongProperties("max_dep");
         interest_pct = getFloatProperties("interest_pct");
+        max_player = getLongProperties("max_player");
     }
 
     public static Properties loadConfig() {
