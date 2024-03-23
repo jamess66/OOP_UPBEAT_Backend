@@ -35,7 +35,7 @@ public class PlayerObject {
         setIsPlayerTurn();
     }
 
-    void setIsPlayerTurn(){
+    public void setIsPlayerTurn(){
         this.isPlayerTurn = currentPlayerSubmittedTurn == playerTurn;
     }
 

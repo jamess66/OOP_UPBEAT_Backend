@@ -42,12 +42,14 @@ public class GameState implements GameInstance {
     }
 
     public PlayerInstance createPlayerInstance(String name) {
-        System.out.println("createPlayerInstance " + name);
-        if(!players.containsKey(name)){
-            players.put(name, new CrewState(name, new Crew(territory, randomPlayerColor()), territory, setPlayerTurn()));
-            totalPlayer = totalPlayer + 1;
-        }
-        return players.get(name);
+        if(ConfigLoader.max_player <= -1 || players.size() < ConfigLoader.max_player){
+            System.out.println("createPlayerInstance " + name);
+            if(!players.containsKey(name)){
+                players.put(name, new CrewState(name, new Crew(territory, randomPlayerColor()), territory, setPlayerTurn()));
+                totalPlayer = totalPlayer + 1;
+            }
+            return players.get(name);
+        } return new CrewState("", null, null,-1);
     }
 
     public boolean removePlayerInstance(String name){
@@ -108,6 +110,10 @@ public class GameState implements GameInstance {
 //        if(players.size() == 1) return true;
 //        return false;
 //    }
+    @Override
+    public int getTotalPlayer(){
+        return totalPlayer;
+    }
 
     private String randomPlayerColor() {
         int randIndex = (int) Math.abs(Utility.getRandomNumber() % PlayerColorList.size());

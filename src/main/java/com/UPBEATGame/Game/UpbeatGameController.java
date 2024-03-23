@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @CrossOrigin
 @RestController
@@ -23,6 +24,10 @@ public class UpbeatGameController {
 
     @PostMapping({"/player"})
     public PlayerObject createPlayer(@RequestBody String body) {
+        if(GAME_INSTANCE.getPlayers().size() > ConfigLoader.getMax_player()){
+            System.out.println("asdasdasdsadsadsadasswedrfgtyhujkiolswedrftgyhujkiedrftgyhkmjil");
+            return null;
+        }
         if(GAME_INSTANCE.getTerritory().isAllClaimed()) return null; // cannot create anymore
         return new PlayerObject(body, true);
     }
@@ -30,7 +35,7 @@ public class UpbeatGameController {
     @DeleteMapping("/removePlayer/{name}")
     public boolean removePlayer(@PathVariable String name) {
         if (getPlayer(name).getIsPlayerTurn()){
-            submitConstructionPlan(name, "done");
+            submitConstructionPlan(name, "OUT-OF_TIME-TURN_END-NOW");
         }
         return GAME_INSTANCE.removePlayerInstance(name);
     }
@@ -47,23 +52,33 @@ public class UpbeatGameController {
 
     @PutMapping("/constructionPlan/{name}")
     public String submitConstructionPlan(@PathVariable String name, @RequestBody String constructionPlan){
-        System.out.println("Put Construction Plan.");
-        try {
-            if(GAME_INSTANCE.getPlayerInstance(name).getPlayerTurn() != currentPlayerSubmittedTurn) return "Not your turn yet!!"; // not player turn
-            GAME_INSTANCE.getPlayerInstance(name).setConstructionPlan(constructionPlan);
-            GAME_INSTANCE.getPlayerInstance(name).actionExecute();
-            turnCalculation();
-            if(GAME_INSTANCE.getPlayers().isEmpty() || GAME_INSTANCE.getPlayers().size() <= 1){
-                currentPlayerSubmittedTurn = 0;
-                globalTurn = 0;
+
+            System.out.println("Put Construction Plan.");
+            try {
+
+                if(GAME_INSTANCE.getPlayerInstance(name).getPlayerTurn() != currentPlayerSubmittedTurn) return "Not your turn yet!!"; // not player turn
+                if(Objects.equals(constructionPlan, "OUT-OF_TIME-TURN_END-NOW")){
+                    GAME_INSTANCE.getPlayerInstance(name).getPlayer().addBudget(2);
+                    GAME_INSTANCE.getPlayerInstance(name).setConstructionPlan("done outOfReserveTime = 18378234");
+                    GAME_INSTANCE.getPlayerInstance(name).actionExecute();
+                    GAME_INSTANCE.getPlayerInstance(name).setConstructionPlan(constructionPlan);
+                }else{
+                    GAME_INSTANCE.getPlayerInstance(name).setConstructionPlan(constructionPlan);
+                    GAME_INSTANCE.getPlayerInstance(name).actionExecute();
+                }
+                turnCalculation();
+                if(GAME_INSTANCE.getPlayers().isEmpty() || GAME_INSTANCE.getPlayers().size() <= 1){
+                    currentPlayerSubmittedTurn = 0;
+                    globalTurn = 0;
+                }
+
+                GAME_INSTANCE.checkIsAnyoneLoseCityCenter();
+
+            }catch (Exception e){
+                return "Error: " + e.getMessage();
             }
+            return "Finished!!"; // construction plan is correct syntax.
 
-            GAME_INSTANCE.checkIsAnyoneLoseCityCenter();
-
-        }catch (Exception e){
-            return "Error: " + e.getMessage();
-        }
-        return "Finished!!"; // construction plan is correct syntax.
     }
 
     private void turnCalculation(){
@@ -86,6 +101,7 @@ public class UpbeatGameController {
             PlayerObject playerObject = new PlayerObject(playerInstance.getPlayerName(), false);
             playerObject.setIsPlayerTurn();
             playerObjects.add(playerObject);
+            playerObject.setIsPlayerTurn();
         }
         System.out.println("Get All Player.");
         return playerObjects;

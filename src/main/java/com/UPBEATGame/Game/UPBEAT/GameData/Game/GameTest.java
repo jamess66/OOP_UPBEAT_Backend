@@ -33,6 +33,11 @@ public class GameTest {
     }
 
     @Test
+    public void testTest(){
+        System.out.println(gameInstance.getTotalPlayer());
+    }
+
+    @Test
     public void testGetPlayerInstance(){
         PlayerInstance player1 = gameInstance.createPlayerInstance("james",1, 0);
         PlayerInstance player2 = gameInstance.createPlayerInstance("john",2, 0);
